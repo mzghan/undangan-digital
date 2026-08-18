@@ -9,12 +9,22 @@ import {
   setStoredSessionId,
   clearStoredSessionId,
 } from "../api/weddingTrial";
+import {
+  generateChecklist,
+  updateChecklistItem,
+  addChecklistItem,
+  deleteChecklistItem,
+} from "../api/checklist";
 import type {
   Step2BudgetResponse,
   Step2KonsepResponse,
   BudgetTier,
   PriceItem,
 } from "../types/weddingTrial";
+import type {
+  ChecklistItem,
+  ChecklistItemUpdateRequest,
+} from "../types/checklist";
 
 type Step =
   | "loading"
@@ -23,7 +33,8 @@ type Step =
   | "budget-input"
   | "hasil-budget"
   | "konsep-input"
-  | "hasil-konsep";
+  | "hasil-konsep"
+  | "checklist";
 
 const KOTA_OPTIONS = ["Jakarta", "Bandung"];
 const KONSEP_OPTIONS = [
@@ -150,6 +161,15 @@ function WeddingPlannerTrial() {
     null,
   );
   const [activeTierIndex, setActiveTierIndex] = useState(1); // default: tab "Ideal" (index 1)
+  const [checklistItems, setChecklistItems] = useState<ChecklistItem[]>([]);
+  const [checklistBudgetTotal, setChecklistBudgetTotal] = useState<
+    number | null
+  >(null);
+  const [editingItemId, setEditingItemId] = useState<number | null>(null);
+  const [editItemName, setEditItemName] = useState("");
+  const [editItemHarga, setEditItemHarga] = useState("");
+  const [newItemName, setNewItemName] = useState("");
+  const [newItemHarga, setNewItemHarga] = useState("");
 
   // Mulai sesi trial saat halaman pertama dibuka
   useEffect(() => {
@@ -201,6 +221,58 @@ function WeddingPlannerTrial() {
     },
   });
 
+  const checklistMutation = useMutation<ChecklistItem[], Error, number>({
+    mutationFn: (budgetTotal) =>
+      generateChecklist({
+        session_id: sessionId as string,
+        budget_total: budgetTotal,
+      }),
+    onSuccess: (res, budgetTotal) => {
+      setChecklistItems(res);
+      setChecklistBudgetTotal(budgetTotal);
+      setStep("checklist");
+    },
+  });
+
+  const updateItemMutation = useMutation<
+    ChecklistItem,
+    Error,
+    { itemId: number; payload: ChecklistItemUpdateRequest }
+  >({
+    mutationFn: ({ itemId, payload }) => updateChecklistItem(itemId, payload),
+    onSuccess: (updatedItem) => {
+      setChecklistItems((prev) =>
+        prev.map((item) => (item.id === updatedItem.id ? updatedItem : item)),
+      );
+      setEditingItemId(null);
+    },
+  });
+
+  const addItemMutation = useMutation<
+    ChecklistItem,
+    Error,
+    { item_name: string; harga_alokasi: number }
+  >({
+    mutationFn: (payload) =>
+      addChecklistItem({
+        session_id: sessionId as string,
+        item_name: payload.item_name,
+        harga_alokasi: payload.harga_alokasi,
+      }),
+    onSuccess: (newItem) => {
+      setChecklistItems((prev) => [...prev, newItem]);
+      setNewItemName("");
+      setNewItemHarga("");
+    },
+  });
+
+  const deleteItemMutation = useMutation<void, Error, number>({
+    mutationFn: (itemId) => deleteChecklistItem(itemId),
+    onSuccess: (_data, itemId) => {
+      setChecklistItems((prev) => prev.filter((item) => item.id !== itemId));
+    },
+  });
+
   function handleReset() {
     clearStoredSessionId();
     setSessionId(null);
@@ -211,6 +283,13 @@ function WeddingPlannerTrial() {
     setBudgetResult(null);
     setKonsepResult(null);
     setActiveTierIndex(1);
+    setChecklistItems([]);
+    setChecklistBudgetTotal(null);
+    setEditingItemId(null);
+    setEditItemName("");
+    setEditItemHarga("");
+    setNewItemName("");
+    setNewItemHarga("");
     setStep("loading");
     startTrial().then((res) => {
       setStoredSessionId(res.session_id);
@@ -354,6 +433,15 @@ function WeddingPlannerTrial() {
               items_opsional: budgetResult.items_opsional,
             }}
           />
+          <button
+            disabled={checklistMutation.isPending}
+            onClick={() => checklistMutation.mutate(budgetResult.budget_total)}
+            className="mt-6 bg-rose-700 text-white px-6 py-2 rounded-md hover:bg-rose-800 transition-colors disabled:opacity-40"
+          >
+            {checklistMutation.isPending
+              ? "Menyusun checklist..."
+              : "Lanjut ke Checklist"}
+          </button>
         </div>
       )}
 
@@ -419,6 +507,193 @@ function WeddingPlannerTrial() {
           </div>
 
           <TierBreakdown tier={konsepResult.tiers[activeTierIndex]} />
+
+          <button
+            disabled={checklistMutation.isPending}
+            onClick={() =>
+              checklistMutation.mutate(
+                konsepResult.tiers[activeTierIndex].budget_total,
+              )
+            }
+            className="mt-6 bg-rose-700 text-white px-6 py-2 rounded-md hover:bg-rose-800 transition-colors disabled:opacity-40"
+          >
+            {checklistMutation.isPending
+              ? "Menyusun checklist..."
+              : "Lanjut ke Checklist"}
+          </button>
+        </div>
+      )}
+
+      {step === "checklist" && (
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <h2 className="text-lg font-semibold text-gray-800 mb-1">
+            Checklist Persiapan
+          </h2>
+          <p className="text-sm text-gray-400 mb-4">
+            Dibuat otomatis dari kebutuhan wajib &amp; penting sesuai budget
+            kamu. Kamu bisa edit, hapus, atau tambah item sendiri.
+          </p>
+
+          <ul>
+            {checklistItems.map((item) => (
+              <li
+                key={item.id}
+                className="py-3 border-b border-gray-100 last:border-0"
+              >
+                {editingItemId === item.id ? (
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+                    <input
+                      type="text"
+                      value={editItemName}
+                      onChange={(e) => setEditItemName(e.target.value)}
+                      className="flex-1 border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300"
+                    />
+                    <input
+                      type="number"
+                      value={editItemHarga}
+                      onChange={(e) => setEditItemHarga(e.target.value)}
+                      className="w-full sm:w-40 border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300"
+                    />
+                    <div className="flex gap-2 shrink-0">
+                      <button
+                        onClick={() =>
+                          updateItemMutation.mutate({
+                            itemId: item.id,
+                            payload: {
+                              item_name: editItemName,
+                              harga_alokasi: Number(editItemHarga),
+                            },
+                          })
+                        }
+                        disabled={updateItemMutation.isPending}
+                        className="text-xs bg-rose-700 text-white px-3 py-1.5 rounded-md hover:bg-rose-800 disabled:opacity-40"
+                      >
+                        Simpan
+                      </button>
+                      <button
+                        onClick={() => setEditingItemId(null)}
+                        className="text-xs text-gray-500 px-3 py-1.5 rounded-md hover:bg-gray-100"
+                      >
+                        Batal
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between">
+                    <label className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={item.is_done}
+                        onChange={() =>
+                          updateItemMutation.mutate({
+                            itemId: item.id,
+                            payload: { is_done: !item.is_done },
+                          })
+                        }
+                        className="w-4 h-4 accent-rose-700"
+                      />
+                      <span
+                        className={`text-sm ${item.is_done ? "line-through text-gray-400" : "text-gray-800"}`}
+                      >
+                        {item.item_name}
+                      </span>
+                    </label>
+                    <div className="flex items-center gap-3 ml-4">
+                      <span className="text-sm font-medium text-gray-600 whitespace-nowrap">
+                        {formatRupiah(item.harga_alokasi)}
+                      </span>
+                      <button
+                        onClick={() => {
+                          setEditingItemId(item.id);
+                          setEditItemName(item.item_name);
+                          setEditItemHarga(String(item.harga_alokasi));
+                        }}
+                        className="text-xs text-gray-400 hover:text-rose-700"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => deleteItemMutation.mutate(item.id)}
+                        disabled={deleteItemMutation.isPending}
+                        className="text-xs text-gray-400 hover:text-red-600"
+                      >
+                        Hapus
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-gray-100 sm:flex-row sm:items-center">
+            <input
+              type="text"
+              value={newItemName}
+              onChange={(e) => setNewItemName(e.target.value)}
+              placeholder="Nama item baru"
+              className="flex-1 border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300"
+            />
+            <input
+              type="number"
+              value={newItemHarga}
+              onChange={(e) => setNewItemHarga(e.target.value)}
+              placeholder="Harga"
+              className="w-full sm:w-40 border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300"
+            />
+            <button
+              disabled={!newItemName || addItemMutation.isPending}
+              onClick={() =>
+                addItemMutation.mutate({
+                  item_name: newItemName,
+                  harga_alokasi: Number(newItemHarga) || 0,
+                })
+              }
+              className="text-sm bg-white border border-rose-700 text-rose-700 px-4 py-1.5 rounded-md hover:bg-rose-50 disabled:opacity-40 shrink-0"
+            >
+              {addItemMutation.isPending ? "Menambah..." : "+ Tambah Item"}
+            </button>
+          </div>
+
+          {(() => {
+            const totalChecklist = checklistItems.reduce(
+              (sum, item) => sum + item.harga_alokasi,
+              0,
+            );
+            const overBudget =
+              checklistBudgetTotal !== null &&
+              totalChecklist > checklistBudgetTotal;
+
+            return (
+              <div className="mt-4 pt-4 border-t-2 border-gray-200">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-semibold text-gray-800">
+                    Total Checklist
+                  </p>
+                  <p
+                    className={`text-sm font-semibold ${overBudget ? "text-red-600" : "text-rose-700"}`}
+                  >
+                    {formatRupiah(totalChecklist)}
+                  </p>
+                </div>
+                {checklistBudgetTotal !== null && (
+                  <div className="flex items-center justify-between mt-1">
+                    <p className="text-xs text-gray-400">Budget kamu</p>
+                    <p className="text-xs text-gray-400">
+                      {formatRupiah(checklistBudgetTotal)}
+                    </p>
+                  </div>
+                )}
+                {overBudget && (
+                  <p className="text-xs text-red-600 bg-red-50 rounded-md px-3 py-2 mt-3">
+                    ⚠️ Total melebihi budget kamu (kelebihan{" "}
+                    {formatRupiah(totalChecklist - (checklistBudgetTotal ?? 0))}
+                    )
+                  </p>
+                )}
+              </div>
+            );
+          })()}
         </div>
       )}
     </div>

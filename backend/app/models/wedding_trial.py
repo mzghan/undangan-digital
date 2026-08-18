@@ -12,6 +12,7 @@ class TrialSession(Base):
     jalur = Column(String, nullable=True)  
     budget_total = Column(Integer, nullable=True) 
     konsep_pilihan = Column(String, nullable=True)
+    wedding_date = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     expires_at = Column(DateTime, nullable=False) 
 
