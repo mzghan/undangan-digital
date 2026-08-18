@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Jost", sans-serif;
+
+  --color-brand-50: #fbf6f0;
+  --color-brand-100: #f3e4e0;
+  --color-brand-400: #b8935a;
+  --color-brand-700: #6b1029;
+  --color-brand-800: #4a0b1c;
+  --color-ink: #2e2a28;
+  --color-muted: #8c8078;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+}
