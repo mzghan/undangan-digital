@@ -7,6 +7,7 @@ class TrialSession(Base):
     __tablename__ = "trial_sessions"
 
     session_id = Column(String, primary_key=True, index=True)  
+    paket = Column(String, nullable=False, default="basic")
     user_id = Column(String, nullable=True)  
     kota = Column(String, nullable=False)
     jalur = Column(String, nullable=True)  

@@ -72,6 +72,14 @@ function WeddingPlanner() {
                   Coba Trial Gratis
                 </Link>
               )}
+              {pkg.nama_paket === "Paket Premium" && (
+                <Link
+                  to="/wedding-planner/trial-premium"
+                  className="mt-6 border border-rose-700 text-rose-700 text-center py-2 rounded-md hover:bg-rose-50 transition-colors"
+                >
+                  Coba Trial Gratis
+                </Link>
+              )}
               <a
                 href={`https://wa.me/6282112989744?text=${waMessage}`}
                 target="_blank"

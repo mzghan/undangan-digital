@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.wedding_trial import TrialSession, CityPriceIndex, ConceptReference
 from app.schemas.wedding_trial import (
+    TrialStartRequest,
     TrialStartResponse,
     Step1Request,
     Step1Response,
@@ -82,14 +83,15 @@ def _hitung_breakdown(items: list[CityPriceIndex], budget_total: int):
 
 
 @router.post("/start", response_model=TrialStartResponse)
-def start_trial():
+def start_trial(payload: TrialStartRequest = TrialStartRequest()):
     """Generate session_id baru. Belum disimpan ke DB di sini — baru disimpan
     saat user pilih kota di /step1, supaya tidak ada baris 'kosong' menumpuk
     di DB kalau user buka trial tapi tidak lanjut isi apa-apa."""
     session_id = str(uuid.uuid4())
     expires_at = datetime.utcnow() + timedelta(hours=SESSION_DURATION_HOURS)
-    return TrialStartResponse(session_id=session_id, expires_at=expires_at.isoformat())
-
+    return TrialStartResponse(
+        session_id=session_id, paket=payload.paket, expires_at=expires_at.isoformat()
+    )
 
 @router.post("/step1", response_model=Step1Response)
 def choose_kota(payload: Step1Request, db: Session = Depends(get_db)):
@@ -101,6 +103,7 @@ def choose_kota(payload: Step1Request, db: Session = Depends(get_db)):
     else:
         session = TrialSession(
             session_id=payload.session_id,
+            paket=payload.paket,
             kota=payload.kota,
             jalur=None,
             created_at=datetime.utcnow(),
@@ -110,7 +113,10 @@ def choose_kota(payload: Step1Request, db: Session = Depends(get_db)):
 
     db.commit()
 
-    return Step1Response(session_id=payload.session_id, kota=payload.kota, kota_tersedia=kota_tersedia)
+    return Step1Response(
+        session_id=payload.session_id, kota=payload.kota,
+        paket=session.paket, kota_tersedia=kota_tersedia,
+    )
 
 
 @router.post("/step2-budget", response_model=Step2BudgetResponse)
@@ -200,6 +206,7 @@ def get_trial_session(session_id: str, db: Session = Depends(get_db)):
     session = _get_session_or_404(db, session_id)
     return TrialSessionResponse(
         session_id=session.session_id,
+        paket=session.paket,         
         kota=session.kota,
         jalur=session.jalur,
         budget_total=session.budget_total,

@@ -4,26 +4,34 @@ import type {
   Step2BudgetResponse,
   Step2KonsepResponse,
   TrialSession,
+  Paket,
 } from "../types/weddingTrial";
 
 const API_BASE_URL = "http://127.0.0.1:8000";
-const STORAGE_KEY = "wedding_trial_session_id";
+const STORAGE_KEY_PREFIX = "wedding_trial_session_id";
 
-export function getStoredSessionId(): string | null {
-  return localStorage.getItem(STORAGE_KEY);
+export function getStoredSessionId(paket: Paket = "basic"): string | null {
+  return localStorage.getItem(`${STORAGE_KEY_PREFIX}_${paket}`);
 }
 
-export function setStoredSessionId(sessionId: string): void {
-  localStorage.setItem(STORAGE_KEY, sessionId);
+export function setStoredSessionId(
+  sessionId: string,
+  paket: Paket = "basic",
+): void {
+  localStorage.setItem(`${STORAGE_KEY_PREFIX}_${paket}`, sessionId);
 }
 
-export function clearStoredSessionId(): void {
-  localStorage.removeItem(STORAGE_KEY);
+export function clearStoredSessionId(paket: Paket = "basic"): void {
+  localStorage.removeItem(`${STORAGE_KEY_PREFIX}_${paket}`);
 }
 
-export async function startTrial(): Promise<TrialStartResponse> {
+export async function startTrial(
+  paket: Paket = "basic",
+): Promise<TrialStartResponse> {
   const response = await fetch(`${API_BASE_URL}/api/trial/start`, {
     method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ paket }),
   });
   if (!response.ok) {
     throw new Error("Gagal memulai trial");
@@ -34,11 +42,12 @@ export async function startTrial(): Promise<TrialStartResponse> {
 export async function chooseKota(
   sessionId: string,
   kota: string,
+  paket: Paket = "basic",
 ): Promise<Step1Response> {
   const response = await fetch(`${API_BASE_URL}/api/trial/step1`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ session_id: sessionId, kota }),
+    body: JSON.stringify({ session_id: sessionId, kota, paket }),
   });
   if (!response.ok) {
     throw new Error("Gagal menyimpan pilihan kota");

@@ -8,6 +8,7 @@ import WeddingPlanner from "./pages/WeddingPlanner";
 import AksaraHashtag from "./pages/AksaraHashtag";
 import KembangSriwijayaDemo from "./pages/demo/KembangSriwijaya";
 import WeddingPlannerTrial from "./pages/WeddingPlannerTrial";
+import WeddingPlannerTrialPremium from "./pages/WeddingPlannerTrialPremium";
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
           <Route
             path="/wedding-planner/trial"
             element={<WeddingPlannerTrial />}
+          />
+          <Route
+            path="/wedding-planner/trial-premium"
+            element={<WeddingPlannerTrialPremium />}
           />
         </Route>
         <Route

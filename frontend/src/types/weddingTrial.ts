@@ -1,11 +1,15 @@
+export type Paket = "basic" | "premium";
+
 export interface TrialStartResponse {
   session_id: string;
+  paket: Paket;
   expires_at: string;
 }
 
 export interface Step1Response {
   session_id: string;
   kota: string;
+  paket: Paket;
   kota_tersedia: boolean;
 }
 
@@ -49,6 +53,7 @@ export interface Step2KonsepResponse {
 
 export interface TrialSession {
   session_id: string;
+  paket: Paket;
   kota: string;
   jalur: "budget" | "konsep";
   budget_total: number | null;
