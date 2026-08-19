@@ -7,6 +7,7 @@ export interface ChecklistItem {
   is_done: boolean;
   is_custom: boolean;
   source_item_name: string | null;
+  deadline_date: string | null;
 }
 
 export interface ChecklistGenerateRequest {
@@ -26,4 +27,5 @@ export interface ChecklistItemUpdateRequest {
   kategori?: string;
   harga_alokasi?: number;
   is_done?: boolean;
+  deadline_date?: string;
 }
