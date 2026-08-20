@@ -29,6 +29,8 @@ class ChecklistItemPremiumSchema(BaseModel):
     is_custom: bool
     source_item_name: Optional[str]
     deadline_date: Optional[datetime]
+    deadline_recommended: Optional[datetime]
+    deadline_is_custom: bool
     subtasks: List[ChecklistSubtaskSchema] = []
 
     class Config:

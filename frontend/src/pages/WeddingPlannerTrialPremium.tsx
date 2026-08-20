@@ -18,6 +18,10 @@ import {
   updateSubtask,
   deleteSubtask,
 } from "../api/checklistPremium";
+import {
+  setWeddingDatePremium,
+  resetDeadlineToRecommended,
+} from "../api/timelinePremium";
 import type {
   Step2BudgetResponse,
   Step2KonsepResponse,
@@ -27,8 +31,48 @@ import type {
   ChecklistPrioritas,
   ChecklistStatus,
 } from "../types/checklistPremium";
+import type { TimelinePremiumResponse } from "../types/timelinePremium";
 import { formatRupiah, TierBreakdown } from "../components/BudgetBreakdown";
 import { useEffect } from "react";
+
+function formatTanggal(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString("id-ID", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+function formatBulanTahun(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString("id-ID", {
+    month: "long",
+    year: "numeric",
+  });
+}
+
+function groupItemsByMonth(
+  items: ChecklistItemPremium[],
+): { label: string; items: ChecklistItemPremium[] }[] {
+  const sorted = [...items].sort((a, b) => {
+    const da = a.deadline_date ? new Date(a.deadline_date).getTime() : Infinity;
+    const db = b.deadline_date ? new Date(b.deadline_date).getTime() : Infinity;
+    return da - db;
+  });
+
+  const groups: { label: string; items: ChecklistItemPremium[] }[] = [];
+  for (const item of sorted) {
+    const label = item.deadline_date
+      ? formatBulanTahun(item.deadline_date)
+      : "Belum ditentukan";
+    const existing = groups.find((g) => g.label === label);
+    if (existing) {
+      existing.items.push(item);
+    } else {
+      groups.push({ label, items: [item] });
+    }
+  }
+  return groups;
+}
 
 type Step =
   | "loading"
@@ -38,7 +82,7 @@ type Step =
   | "konsep-input"
   | "hasil";
 
-type ResultTab = "budget" | "checklist";
+type ResultTab = "budget" | "checklist" | "timeline";
 
 const KOTA_OPTIONS = ["Jakarta", "Bandung"];
 const KONSEP_OPTIONS = [
@@ -99,6 +143,16 @@ function WeddingPlannerTrialPremium() {
     Record<number, string>
   >({});
 
+  // --- state Timeline Premium ---
+  const [weddingDateInput, setWeddingDateInput] = useState("");
+  const [weddingDateSaved, setWeddingDateSaved] = useState<string | null>(null);
+  const [deadlineInputByItem, setDeadlineInputByItem] = useState<
+    Record<number, string>
+  >({});
+  const [catatanInputByItem, setCatatanInputByItem] = useState<
+    Record<number, string>
+  >({});
+
   function getCurrentBudgetTotal(): number | null {
     if (budgetResult) return budgetResult.budget_total;
     if (konsepResult) return konsepResult.tiers[activeTierIndex].budget_total;
@@ -153,6 +207,36 @@ function WeddingPlannerTrialPremium() {
       setKonsepResult(res);
       setResultTab("budget");
       setStep("hasil");
+    },
+  });
+
+  const timelineMutation = useMutation<TimelinePremiumResponse, Error, string>({
+    mutationFn: (weddingDateStr) =>
+      setWeddingDatePremium({
+        session_id: sessionId as string,
+        wedding_date: weddingDateStr,
+      }),
+    onSuccess: (res) => {
+      setChecklistItems(res.items);
+      setWeddingDateSaved(res.wedding_date);
+    },
+  });
+
+  const resetDeadlineMutation = useMutation<
+    ChecklistItemPremium,
+    Error,
+    number
+  >({
+    mutationFn: (itemId) => resetDeadlineToRecommended(itemId),
+    onSuccess: (updatedItem) => {
+      setChecklistItems((prev) =>
+        prev.map((item) => (item.id === updatedItem.id ? updatedItem : item)),
+      );
+      setDeadlineInputByItem((prev) => {
+        const next = { ...prev };
+        delete next[updatedItem.id];
+        return next;
+      });
     },
   });
 
@@ -296,6 +380,10 @@ function WeddingPlannerTrialPremium() {
     setChecklistBudgetTotal(null);
     setExpandedItemId(null);
     setEditingItemId(null);
+    setWeddingDateInput("");
+    setWeddingDateSaved(null);
+    setDeadlineInputByItem({});
+    setCatatanInputByItem({});
     setStep("loading");
     startTrial(PAKET).then((res) => {
       setStoredSessionId(res.session_id, PAKET);
@@ -471,6 +559,21 @@ function WeddingPlannerTrialPremium() {
               }`}
             >
               Checklist
+            </button>
+            <button
+              onClick={() =>
+                checklistItems.length > 0 && setResultTab("timeline")
+              }
+              disabled={checklistItems.length === 0}
+              className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors ${
+                checklistItems.length === 0
+                  ? "border-transparent text-gray-300 cursor-not-allowed"
+                  : resultTab === "timeline"
+                    ? "border-rose-700 text-rose-700"
+                    : "border-transparent text-gray-400 hover:text-gray-600"
+              }`}
+            >
+              Timeline
             </button>
           </div>
 
@@ -882,6 +985,196 @@ function WeddingPlannerTrialPremium() {
                     );
                   })()}
                 </>
+              )}
+            </div>
+          )}
+
+          {resultTab === "timeline" && (
+            <div>
+              {checklistItems.length === 0 ? (
+                <p className="text-sm text-gray-400 py-10 text-center">
+                  Selesaikan checklist dulu untuk membuka timeline.
+                </p>
+              ) : !weddingDateSaved ? (
+                <div>
+                  <h2 className="text-lg font-semibold text-gray-800 mb-1">
+                    Kapan rencana hari-H kamu?
+                  </h2>
+                  <p className="text-sm text-gray-400 mb-4">
+                    Kami bantu petakan kapan tiap item checklist idealnya sudah
+                    fix, dihitung mundur dari tanggal ini — item prioritas wajib
+                    dimajukan, opsional boleh lebih santai.
+                  </p>
+                  <input
+                    type="date"
+                    value={weddingDateInput}
+                    onChange={(e) => setWeddingDateInput(e.target.value)}
+                    className="w-full border border-gray-300 rounded-md px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-rose-300"
+                  />
+                  <button
+                    disabled={!weddingDateInput || timelineMutation.isPending}
+                    onClick={() => timelineMutation.mutate(weddingDateInput)}
+                    className="bg-rose-700 text-white px-6 py-2 rounded-md hover:bg-rose-800 transition-colors disabled:opacity-40"
+                  >
+                    {timelineMutation.isPending
+                      ? "Menyusun timeline..."
+                      : "Susun Timeline"}
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <h2 className="text-lg font-semibold text-gray-800">
+                        Timeline Persiapan
+                      </h2>
+                      <p className="text-sm text-gray-400">
+                        Menuju hari-H: {formatTanggal(weddingDateSaved)}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => setWeddingDateSaved(null)}
+                      className="text-xs text-gray-400 hover:text-rose-700 shrink-0"
+                    >
+                      Ubah Tanggal
+                    </button>
+                  </div>
+
+                  {groupItemsByMonth(checklistItems).map((group) => (
+                    <div key={group.label} className="mb-6">
+                      <h3 className="text-sm font-semibold text-gray-700 mb-2">
+                        {group.label}
+                      </h3>
+                      <ul>
+                        {group.items.map((item) => (
+                          <li
+                            key={item.id}
+                            className="py-3 border-b border-gray-100 last:border-0"
+                          >
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <span
+                                  className={`text-sm ${item.status === "selesai" ? "line-through text-gray-400" : "text-gray-800"}`}
+                                >
+                                  {item.item_name}
+                                </span>
+                                <span
+                                  className={`text-[10px] px-1.5 py-0.5 rounded-full ${PRIORITAS_LABEL[item.prioritas].className}`}
+                                >
+                                  {PRIORITAS_LABEL[item.prioritas].label}
+                                </span>
+                                {item.deadline_is_custom && (
+                                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-sky-100 text-sky-800">
+                                    Custom
+                                  </span>
+                                )}
+                              </div>
+                              <span className="text-xs text-gray-400 whitespace-nowrap ml-4">
+                                {item.deadline_date
+                                  ? formatTanggal(item.deadline_date)
+                                  : "—"}
+                              </span>
+                            </div>
+
+                            {item.deadline_is_custom &&
+                              item.deadline_recommended && (
+                                <p className="text-[11px] text-gray-400 mt-0.5">
+                                  Rekomendasi sistem:{" "}
+                                  {formatTanggal(item.deadline_recommended)}
+                                </p>
+                              )}
+
+                            <div className="flex flex-wrap items-center gap-2 mt-2 ml-0">
+                              <input
+                                type="date"
+                                value={
+                                  deadlineInputByItem[item.id] ??
+                                  (item.deadline_date
+                                    ? item.deadline_date.slice(0, 10)
+                                    : "")
+                                }
+                                onChange={(e) =>
+                                  setDeadlineInputByItem((prev) => ({
+                                    ...prev,
+                                    [item.id]: e.target.value,
+                                  }))
+                                }
+                                className="border border-gray-300 rounded-md px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-rose-300"
+                              />
+                              <button
+                                disabled={
+                                  !deadlineInputByItem[item.id] ||
+                                  updateItemMutation.isPending
+                                }
+                                onClick={() =>
+                                  updateItemMutation.mutate({
+                                    itemId: item.id,
+                                    payload: {
+                                      deadline_date:
+                                        deadlineInputByItem[item.id],
+                                    },
+                                  })
+                                }
+                                className="text-xs bg-white border border-rose-700 text-rose-700 px-2.5 py-1 rounded-md hover:bg-rose-50 disabled:opacity-40"
+                              >
+                                Ubah Tanggal
+                              </button>
+                              {item.deadline_is_custom && (
+                                <button
+                                  disabled={resetDeadlineMutation.isPending}
+                                  onClick={() =>
+                                    resetDeadlineMutation.mutate(item.id)
+                                  }
+                                  className="text-xs text-gray-400 hover:text-rose-700 disabled:opacity-40"
+                                >
+                                  Reset ke rekomendasi
+                                </button>
+                              )}
+                            </div>
+
+                            <div className="flex gap-2 mt-2">
+                              <input
+                                type="text"
+                                value={
+                                  catatanInputByItem[item.id] ??
+                                  item.catatan ??
+                                  ""
+                                }
+                                onChange={(e) =>
+                                  setCatatanInputByItem((prev) => ({
+                                    ...prev,
+                                    [item.id]: e.target.value,
+                                  }))
+                                }
+                                placeholder="Tambah catatan untuk item ini..."
+                                className="flex-1 border border-gray-300 rounded-md px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-rose-300"
+                              />
+                              <button
+                                disabled={
+                                  catatanInputByItem[item.id] === undefined ||
+                                  catatanInputByItem[item.id] ===
+                                    (item.catatan ?? "") ||
+                                  updateItemMutation.isPending
+                                }
+                                onClick={() =>
+                                  updateItemMutation.mutate({
+                                    itemId: item.id,
+                                    payload: {
+                                      catatan: catatanInputByItem[item.id],
+                                    },
+                                  })
+                                }
+                                className="text-xs bg-white border border-rose-700 text-rose-700 px-2.5 py-1 rounded-md hover:bg-rose-50 disabled:opacity-40 shrink-0"
+                              >
+                                Simpan
+                              </button>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
           )}

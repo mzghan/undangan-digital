@@ -21,6 +21,8 @@ class ChecklistItemPremium(Base):
     is_custom = Column(Boolean, nullable=False, default=False)
     source_item_name = Column(String, nullable=True)
     deadline_date = Column(DateTime, nullable=True)
+    deadline_recommended = Column(DateTime, nullable=True)
+    deadline_is_custom = Column(Boolean, nullable=False, default=False)
 
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)

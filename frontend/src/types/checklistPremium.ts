@@ -20,6 +20,8 @@ export interface ChecklistItemPremium {
   is_custom: boolean;
   source_item_name: string | null;
   deadline_date: string | null;
+  deadline_recommended: string | null;
+  deadline_is_custom: boolean;
   subtasks: ChecklistSubtask[];
 }
 

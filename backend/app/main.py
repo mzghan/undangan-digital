@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import engine, Base
-from app.routers import temas, portofolio, testimoni, planner_package, hashtag, wedding_trial, checklist, timeline, checklistPremium
+from app.routers import temas, portofolio, testimoni, planner_package, hashtag, wedding_trial, checklist, timeline, checklistPremium, timelinePremium
 
 Base.metadata.create_all(bind=engine)
 
@@ -25,6 +25,7 @@ app.include_router(wedding_trial.router)
 app.include_router(checklist.router)
 app.include_router(timeline.router)
 app.include_router(checklistPremium.router)
+app.include_router(timelinePremium.router)
 
 @app.get("/")
 def root():

@@ -126,6 +126,7 @@ def update_checklist_item_premium(
         item.catatan = payload.catatan
     if payload.deadline_date is not None:
         item.deadline_date = datetime.fromisoformat(payload.deadline_date)
+        item.deadline_is_custom = True
 
     item.updated_at = datetime.utcnow()
     db.commit()
