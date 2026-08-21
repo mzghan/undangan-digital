@@ -80,7 +80,7 @@ class TrialSessionResponse(BaseModel):
     session_id: str
     paket: str
     kota: str
-    jalur: str
+    jalur: Optional[str]
     budget_total: Optional[int]
     konsep_pilihan: Optional[str]
     created_at: str

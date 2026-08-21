@@ -16,6 +16,8 @@ class VendorSchema(BaseModel):
     nominal_dp: Optional[int]
     tanggal_dp: Optional[datetime]
     catatan: Optional[str]
+    tanggal_kontrak: Optional[datetime]
+    dokumen_kontrak_url: Optional[str]
 
     class Config:
         from_attributes = True
@@ -29,8 +31,10 @@ class VendorCreateRequest(BaseModel):
     kontak_wa: Optional[str] = None
     status_kontrak: VendorStatusKontrak = "belum_kontak"
     nominal_dp: Optional[int] = None
-    tanggal_dp: Optional[str] = None  
+    tanggal_dp: Optional[str] = None  # format ISO "2026-05-01"
     catatan: Optional[str] = None
+    tanggal_kontrak: Optional[str] = None
+    dokumen_kontrak_url: Optional[str] = None
 
 
 class VendorUpdateRequest(BaseModel):
@@ -42,3 +46,5 @@ class VendorUpdateRequest(BaseModel):
     nominal_dp: Optional[int] = None
     tanggal_dp: Optional[str] = None
     catatan: Optional[str] = None
+    tanggal_kontrak: Optional[str] = None
+    dokumen_kontrak_url: Optional[str] = None

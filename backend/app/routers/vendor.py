@@ -46,6 +46,8 @@ def add_vendor(payload: VendorCreateRequest, db: Session = Depends(get_db)):
         nominal_dp=payload.nominal_dp,
         tanggal_dp=datetime.fromisoformat(payload.tanggal_dp) if payload.tanggal_dp else None,
         catatan=payload.catatan,
+        tanggal_kontrak=datetime.fromisoformat(payload.tanggal_kontrak) if payload.tanggal_kontrak else None,
+        dokumen_kontrak_url=payload.dokumen_kontrak_url,
     )
     db.add(vendor)
     db.commit()
@@ -87,6 +89,10 @@ def update_vendor(vendor_id: int, payload: VendorUpdateRequest, db: Session = De
         vendor.tanggal_dp = datetime.fromisoformat(payload.tanggal_dp)
     if payload.catatan is not None:
         vendor.catatan = payload.catatan
+    if payload.tanggal_kontrak is not None:
+        vendor.tanggal_kontrak = datetime.fromisoformat(payload.tanggal_kontrak)
+    if payload.dokumen_kontrak_url is not None:
+        vendor.dokumen_kontrak_url = payload.dokumen_kontrak_url
 
     vendor.updated_at = datetime.utcnow()
     db.commit()

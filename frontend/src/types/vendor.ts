@@ -11,6 +11,8 @@ export interface Vendor {
   nominal_dp: number | null;
   tanggal_dp: string | null;
   catatan: string | null;
+  tanggal_kontrak: string | null;
+  dokumen_kontrak_url: string | null;
 }
 
 export interface VendorCreateRequest {
@@ -23,6 +25,8 @@ export interface VendorCreateRequest {
   nominal_dp?: number | null;
   tanggal_dp?: string | null;
   catatan?: string | null;
+  tanggal_kontrak?: string | null;
+  dokumen_kontrak_url?: string | null;
 }
 
 export interface VendorUpdateRequest {
@@ -34,4 +38,6 @@ export interface VendorUpdateRequest {
   nominal_dp?: number | null;
   tanggal_dp?: string | null;
   catatan?: string | null;
+  tanggal_kontrak?: string | null;
+  dokumen_kontrak_url?: string | null;
 }

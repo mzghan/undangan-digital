@@ -1,4 +1,4 @@
-export type Paket = "basic" | "premium";
+export type Paket = "basic" | "premium" | "vendor_tracker";
 
 export interface TrialStartResponse {
   session_id: string;
