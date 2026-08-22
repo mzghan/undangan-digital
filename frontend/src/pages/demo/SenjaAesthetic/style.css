@@ -1,0 +1,9 @@
+/* Senja Aesthetic — golden hour, modern minimal */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;1,400&family=Manrope:wght@400;500;600;700&display=swap');
+
+.tema-senja-aesthetic {
+  font-family: 'Manrope', sans-serif;
+}
+.tema-senja-aesthetic .font-heading {
+  font-family: 'Libre Baskerville', serif;
+}

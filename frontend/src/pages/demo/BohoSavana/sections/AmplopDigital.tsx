@@ -49,7 +49,7 @@ function AmplopDigital() {
         {daftarRekening.map((r) => (
           <div
             key={r.id}
-            className="bg-white rounded-2xl shadow-md shadow-[#b5654a]/10 px-5 py-4 flex items-center justify-between"
+            className="bg-white rounded-[1.5rem] shadow-md shadow-[#b5654a]/10 px-5 py-4 flex items-center justify-between"
           >
             <div>
               <p className="font-heading text-lg">{r.bank}</p>

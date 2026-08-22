@@ -1,7 +1,6 @@
 // frontend/src/pages/demo/PuspaBali/sections/Mempelai.tsx
 import { motion, type Variants } from "framer-motion";
 import { mempelai } from "../data";
-import BlobDecor from "../components/BlobDecor";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -25,25 +24,24 @@ function KartuMempelai({
 }) {
   return (
     <motion.div
-      className="flex flex-col items-center bg-white rounded-3xl shadow-md shadow-[#c9a24b]/10 px-6 py-8 w-full max-w-[280px]"
+      className="flex flex-col items-center border border-[#c9a24b]/40 px-6 py-8 w-full max-w-[280px]"
       variants={fadeUp}
       custom={delay}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.4 }}
     >
-      <motion.div
-        className="w-24 h-24 sm:w-28 sm:h-28 rounded-full mb-5 bg-gradient-to-br from-[#f0e2b8] to-[#c9a24b] overflow-hidden"
-        whileHover={{ scale: 1.05 }}
-        transition={{ type: "spring", stiffness: 250, damping: 15 }}
+      <div
+        className="w-24 h-28 sm:w-28 sm:h-32 mb-5 bg-gradient-to-br from-[#e3c878] to-[#5c1f1f] border border-[#c9a24b]/60"
+        style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
       >
-        {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover" /> kalau sudah ada foto */}
-      </motion.div>
-      <h2 className="font-heading text-2xl text-[#3a2a1a] mb-1">{nama}</h2>
-      <p className="text-xs text-[#c9a24b] mb-2 tracking-wide uppercase">
+        {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover" style={{clipPath: "inherit"}} /> kalau sudah ada foto */}
+      </div>
+      <h2 className="font-heading text-2xl text-[#f5e6c8] mb-1">{nama}</h2>
+      <p className="text-xs text-[#c9a24b] mb-2 tracking-[0.2em] uppercase">
         {anakKe}
       </p>
-      <p className="text-sm text-[#8a7f6b]">{orangTua}</p>
+      <p className="text-sm text-[#e3c878]/70">{orangTua}</p>
     </motion.div>
   );
 }
@@ -52,13 +50,10 @@ function Mempelai() {
   return (
     <div
       id="mempelai"
-      className="relative min-h-screen bg-[#fdf8ef] text-[#3a2a1a] flex flex-col items-center justify-center px-5 sm:px-10 py-20 text-center overflow-hidden"
+      className="relative min-h-screen bg-[#3d1414] text-[#f5e6c8] flex flex-col items-center justify-center px-5 sm:px-10 py-20 text-center overflow-hidden"
     >
-      <BlobDecor posisi="top-left" warna="#c9a24b" />
-      <BlobDecor posisi="bottom-right" warna="#7a1f1f" />
-
       <motion.p
-        className="tracking-[0.3em] text-[10px] sm:text-xs uppercase text-[#c9a24b] mb-4"
+        className="tracking-[0.4em] text-[10px] sm:text-xs uppercase text-[#c9a24b] mb-4"
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
@@ -68,7 +63,7 @@ function Mempelai() {
       </motion.p>
 
       <motion.p
-        className="max-w-sm text-sm sm:text-base text-[#8a7f6b] mb-12 leading-relaxed"
+        className="max-w-sm text-sm sm:text-base text-[#e3c878]/70 mb-12 leading-relaxed"
         variants={fadeUp}
         custom={0.1}
         initial="hidden"
@@ -87,7 +82,7 @@ function Mempelai() {
           delay={0.2}
         />
 
-        <span className="font-heading text-2xl italic text-[#c9a24b]">&</span>
+        <span className="font-heading text-2xl italic text-[#c9a24b]">&amp;</span>
 
         <KartuMempelai
           nama={mempelai.wanita.nama}

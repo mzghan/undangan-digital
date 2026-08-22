@@ -60,7 +60,7 @@ function UcapanDoa() {
       {/* Form kirim ucapan */}
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white rounded-3xl shadow-md shadow-[#c17b5f]/10 px-6 py-6 flex flex-col gap-4 mb-10"
+        className="w-full max-w-md bg-white rounded-2xl shadow-md shadow-[#c17b5f]/10 px-6 py-6 flex flex-col gap-4 mb-10"
       >
         <input
           type="text"

@@ -1,0 +1,16 @@
+/* Floral Blanc — romantis, minimalis, lembut */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Italiana&family=Jost:wght@300;400&display=swap');
+
+.tema-floral-blanc {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+.tema-floral-blanc .font-heading {
+  font-family: 'Italiana', serif;
+  letter-spacing: 0.04em;
+}
+.tema-floral-blanc .font-script {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+}

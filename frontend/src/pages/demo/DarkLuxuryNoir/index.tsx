@@ -1,4 +1,5 @@
 // frontend/src/pages/demo/DarkLuxuryNoir/index.tsx
+import "./style.css";
 import { useState } from "react";
 import Cover from "./sections/Cover";
 import Mempelai from "./sections/Mempelai";
@@ -9,12 +10,13 @@ import UcapanDoa from "./sections/UcapanDoa";
 import AmplopDigital from "./sections/AmplopDigital";
 import Penutup from "./sections/Penutup";
 import FloatingNav from "./components/FloatingNav";
+import MusicPlayer from "./components/MusicPlayer";
 
 function DarkLuxuryNoirDemo() {
   const [dibuka, setDibuka] = useState(false);
 
   return (
-    <div>
+    <div className="tema-dark-luxury-noir">
       {!dibuka && <Cover onBuka={() => setDibuka(true)} />}
       {dibuka && (
         <div className="min-h-screen">
@@ -28,6 +30,7 @@ function DarkLuxuryNoirDemo() {
             <Penutup />
           </div>
           <FloatingNav />
+          <MusicPlayer aktif={dibuka} />
         </div>
       )}
     </div>

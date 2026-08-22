@@ -32,3 +32,5 @@ export const acara = {
 };
 
 export const tamuDefault = "Bapak/Ibu/Saudara/i";
+export const musik = "/musik/pastel-retro.mp3";
+export const judulMusik = "Musik Latar";

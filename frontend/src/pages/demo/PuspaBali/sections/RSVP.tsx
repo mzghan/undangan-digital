@@ -34,7 +34,7 @@ function RSVP() {
         id="rsvp"
         className="min-h-screen bg-[#f7ecd6] text-[#3a2a1a] flex flex-col items-center justify-center px-6 py-20 text-center"
       >
-        <div className="bg-white rounded-3xl shadow-md shadow-[#c9a24b]/10 px-8 py-10 max-w-sm">
+        <div className="bg-white rounded-none border border-[#c9a24b]/40 shadow-md shadow-[#c9a24b]/10 px-8 py-10 max-w-sm">
           <p className="font-heading text-2xl mb-3">Terima kasih, {nama}!</p>
           <p className="text-sm text-[#8a7f6b]">
             Konfirmasi kehadiranmu sudah kami catat.
@@ -56,7 +56,7 @@ function RSVP() {
 
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white rounded-3xl shadow-md shadow-[#c9a24b]/10 px-6 py-8 flex flex-col gap-5"
+        className="w-full max-w-md bg-white rounded-none border border-[#c9a24b]/40 shadow-md shadow-[#c9a24b]/10 px-6 py-8 flex flex-col gap-5"
       >
         <div>
           <label className="text-sm text-[#8a7f6b] block mb-1">Nama</label>

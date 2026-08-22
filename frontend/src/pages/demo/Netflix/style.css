@@ -1,0 +1,10 @@
+/* Netflix — bold, tegas, gaya streaming */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+
+.tema-netflix {
+  font-family: 'Inter', sans-serif;
+}
+.tema-netflix .font-black {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.02em;
+}

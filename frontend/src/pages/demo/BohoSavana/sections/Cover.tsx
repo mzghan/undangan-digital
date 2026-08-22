@@ -3,25 +3,30 @@ import { mempelai, tamuDefault } from "../data";
 
 function Cover({ onBuka }: { onBuka: () => void }) {
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-end overflow-hidden bg-gradient-to-br from-[#ddb98a] via-[#b5654a] to-[#6b4230]">
-      {/* Ganti div ini dengan <img src="..." className="absolute inset-0 w-full h-full object-cover" /> kalau sudah ada foto */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#f0e4d0] text-[#3d2e1f] px-6 py-14">
+      {/* Dekor titik-titik samar */}
+      <div className="absolute inset-0 opacity-[0.15] [background-image:radial-gradient(#6b4230_1px,transparent_1px)] [background-size:18px_18px]" />
 
-      <div className="relative z-10 flex flex-col items-center text-center px-6 pb-16 sm:pb-20 text-white">
-        <p className="tracking-[0.35em] text-[10px] sm:text-xs uppercase text-white/80 mb-4">
-          The Wedding Of
+      <div className="relative z-10 flex flex-col items-center text-center">
+        <p className="tracking-[0.35em] text-[10px] sm:text-xs uppercase text-[#b5654a] mb-6">
+          ✦ The Wedding Of ✦
         </p>
 
-        <h1 className="font-heading text-5xl sm:text-6xl leading-tight mb-1">
+        {/* Bingkai lengkung ala gapura, foto di dalamnya */}
+        <div className="relative w-56 sm:w-64 aspect-[4/5] rounded-t-[9999px] rounded-b-3xl overflow-hidden bg-gradient-to-b from-[#ddb98a] via-[#b5654a] to-[#6b4230] shadow-xl shadow-[#6b4230]/20 mb-8 border-4 border-white">
+          {/* Ganti div ini dengan <img src="..." className="absolute inset-0 w-full h-full object-cover" /> kalau sudah ada foto */}
+        </div>
+
+        <h1 className="font-heading text-4xl sm:text-5xl leading-tight mb-1">
           {mempelai.pria.panggilan}
         </h1>
-        <span className="text-xl italic text-white/80 my-1">&</span>
-        <h1 className="font-heading text-5xl sm:text-6xl leading-tight mb-8">
+        <span className="text-xl italic text-[#b5654a] my-1">&</span>
+        <h1 className="font-heading text-4xl sm:text-5xl leading-tight mb-8">
           {mempelai.wanita.panggilan}
         </h1>
 
-        <div className="bg-white/15 backdrop-blur-md border border-white/25 rounded-2xl px-6 py-4 mb-8 w-full max-w-xs">
-          <p className="text-[11px] uppercase tracking-widest text-white/70 mb-1">
+        <div className="bg-white/60 border border-[#b5654a]/20 rounded-[2rem] px-6 py-4 mb-8 w-full max-w-xs">
+          <p className="text-[11px] uppercase tracking-widest text-[#b5654a]/80 mb-1">
             Kepada Yth.
           </p>
           <p className="text-base">{tamuDefault}</p>
@@ -29,9 +34,9 @@ function Cover({ onBuka }: { onBuka: () => void }) {
 
         <button
           onClick={onBuka}
-          className="bg-white text-[#8f4a35] rounded-full px-9 py-3.5 text-sm font-medium tracking-wide shadow-lg shadow-black/20 hover:scale-105 active:scale-95 transition-transform"
+          className="bg-[#b5654a] text-white rounded-full px-9 py-3.5 text-sm font-medium tracking-wide shadow-lg shadow-[#b5654a]/30 hover:scale-105 active:scale-95 transition-transform"
         >
-          Buka Undangan
+          Buka Undangan 🌿
         </button>
       </div>
     </div>

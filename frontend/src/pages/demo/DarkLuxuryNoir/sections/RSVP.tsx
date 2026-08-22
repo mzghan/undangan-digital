@@ -34,7 +34,7 @@ function RSVP() {
         id="rsvp"
         className="min-h-screen bg-[#1a1a1a] text-[#f0ede6] flex flex-col items-center justify-center px-6 py-20 text-center"
       >
-        <div className="bg-[#1e1e1e] rounded-3xl shadow-md shadow-[#d4af6a]/10 px-8 py-10 max-w-sm">
+        <div className="bg-[#1e1e1e] rounded-none border border-[#d4af6a]/20 shadow-md shadow-[#d4af6a]/10 px-8 py-10 max-w-sm">
           <p className="font-heading text-2xl mb-3">Terima kasih, {nama}!</p>
           <p className="text-sm text-[#b0a894]">
             Konfirmasi kehadiranmu sudah kami catat.
@@ -56,7 +56,7 @@ function RSVP() {
 
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-[#1e1e1e] rounded-3xl shadow-md shadow-[#d4af6a]/10 px-6 py-8 flex flex-col gap-5"
+        className="w-full max-w-md bg-[#1e1e1e] rounded-none border border-[#d4af6a]/20 shadow-md shadow-[#d4af6a]/10 px-6 py-8 flex flex-col gap-5"
       >
         <div>
           <label className="text-sm text-[#b0a894] block mb-1">Nama</label>
@@ -65,7 +65,7 @@ function RSVP() {
             value={nama}
             onChange={(e) => setNama(e.target.value)}
             placeholder="Nama lengkap"
-            className="w-full bg-[#121212] border border-transparent rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af6a]"
+            className="w-full bg-[#121212] border border-transparent rounded-none border border-[#d4af6a]/20 px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af6a]"
           />
         </div>
 
@@ -77,7 +77,7 @@ function RSVP() {
             <button
               type="button"
               onClick={() => setStatus("hadir")}
-              className={`flex-1 rounded-xl px-4 py-2.5 text-sm transition-colors ${
+              className={`flex-1 rounded-none border border-[#d4af6a]/20 px-4 py-2.5 text-sm transition-colors ${
                 status === "hadir"
                   ? "bg-[#d4af6a] text-white"
                   : "bg-[#121212] text-[#b0a894] hover:bg-[#2a2a2a]"
@@ -88,7 +88,7 @@ function RSVP() {
             <button
               type="button"
               onClick={() => setStatus("tidak-hadir")}
-              className={`flex-1 rounded-xl px-4 py-2.5 text-sm transition-colors ${
+              className={`flex-1 rounded-none border border-[#d4af6a]/20 px-4 py-2.5 text-sm transition-colors ${
                 status === "tidak-hadir"
                   ? "bg-[#d4af6a] text-white"
                   : "bg-[#121212] text-[#b0a894] hover:bg-[#2a2a2a]"
@@ -110,7 +110,7 @@ function RSVP() {
               max={5}
               value={jumlahTamu}
               onChange={(e) => setJumlahTamu(Number(e.target.value))}
-              className="w-full bg-[#121212] border border-transparent rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af6a]"
+              className="w-full bg-[#121212] border border-transparent rounded-none border border-[#d4af6a]/20 px-4 py-2.5 text-sm focus:outline-none focus:border-[#d4af6a]"
             />
           </div>
         )}
@@ -119,7 +119,7 @@ function RSVP() {
 
         <button
           type="submit"
-          className="bg-[#d4af6a] text-white rounded-full px-8 py-3.5 text-sm font-medium tracking-wide shadow-lg shadow-[#d4af6a]/30 hover:bg-[#b8933f] transition-colors mt-2"
+          className="bg-[#d4af6a] text-white rounded-none px-8 py-3.5 text-sm font-medium tracking-wide shadow-lg shadow-[#d4af6a]/30 hover:bg-[#b8933f] transition-colors mt-2"
         >
           Kirim Konfirmasi
         </button>

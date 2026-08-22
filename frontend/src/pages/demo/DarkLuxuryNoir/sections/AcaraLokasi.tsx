@@ -61,7 +61,7 @@ function AcaraLokasi() {
         ].map((item) => (
           <div
             key={item.label}
-            className="flex flex-col items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-[#1e1e1e] rounded-2xl shadow-md shadow-[#d4af6a]/10"
+            className="flex flex-col items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-[#1e1e1e] rounded-none border border-[#d4af6a]/20 shadow-md shadow-[#d4af6a]/10"
           >
             <span className="font-heading text-xl md:text-2xl text-[#d4af6a]">
               {String(item.value).padStart(2, "0")}
@@ -75,13 +75,13 @@ function AcaraLokasi() {
 
       {/* Detail Acara */}
       <div className="flex flex-col sm:flex-row gap-4 mb-12 w-full max-w-lg">
-        <div className="flex-1 bg-[#1e1e1e] rounded-3xl px-6 py-7 shadow-md shadow-[#d4af6a]/10">
+        <div className="flex-1 bg-[#1e1e1e] rounded-none border border-[#d4af6a]/20 px-6 py-7 shadow-md shadow-[#d4af6a]/10">
           <h3 className="font-heading text-xl mb-2">Akad Nikah</h3>
           <p className="text-sm text-[#d4af6a] mb-1">{acara.akad.label}</p>
           <p className="text-sm mb-1">{acara.akad.waktu}</p>
           <p className="text-sm text-[#b0a894]">{acara.akad.lokasi}</p>
         </div>
-        <div className="flex-1 bg-[#1e1e1e] rounded-3xl px-6 py-7 shadow-md shadow-[#d4af6a]/10">
+        <div className="flex-1 bg-[#1e1e1e] rounded-none border border-[#d4af6a]/20 px-6 py-7 shadow-md shadow-[#d4af6a]/10">
           <h3 className="font-heading text-xl mb-2">Resepsi</h3>
           <p className="text-sm text-[#d4af6a] mb-1">{acara.resepsi.label}</p>
           <p className="text-sm mb-1">{acara.resepsi.waktu}</p>
@@ -93,7 +93,7 @@ function AcaraLokasi() {
         href={acara.mapsUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-[#d4af6a] text-white rounded-full px-8 py-3.5 text-sm font-medium tracking-wide shadow-lg shadow-[#d4af6a]/30 hover:bg-[#b8933f] transition-colors"
+        className="bg-[#d4af6a] text-white rounded-none px-8 py-3.5 text-sm font-medium tracking-wide shadow-lg shadow-[#d4af6a]/30 hover:bg-[#b8933f] transition-colors"
       >
         Lihat Lokasi
       </a>

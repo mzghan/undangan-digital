@@ -34,7 +34,7 @@ function RSVP() {
         id="rsvp"
         className="min-h-screen bg-[#e0f2e8] text-[#5b4636] flex flex-col items-center justify-center px-6 py-20 text-center"
       >
-        <div className="bg-white rounded-3xl shadow-md shadow-[#d17a9e]/10 px-8 py-10 max-w-sm">
+        <div className="bg-white rounded-[1.75rem] border-[3px] border-[#2b1b12] shadow-md shadow-[#d17a9e]/10 px-8 py-10 max-w-sm">
           <p className="font-heading text-2xl mb-3">Terima kasih, {nama}!</p>
           <p className="text-sm text-[#9c8577]">
             Konfirmasi kehadiranmu sudah kami catat.
@@ -56,7 +56,7 @@ function RSVP() {
 
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white rounded-3xl shadow-md shadow-[#d17a9e]/10 px-6 py-8 flex flex-col gap-5"
+        className="w-full max-w-md bg-white rounded-[1.75rem] border-[3px] border-[#2b1b12] shadow-md shadow-[#d17a9e]/10 px-6 py-8 flex flex-col gap-5"
       >
         <div>
           <label className="text-sm text-[#9c8577] block mb-1">Nama</label>
@@ -119,7 +119,7 @@ function RSVP() {
 
         <button
           type="submit"
-          className="bg-[#d17a9e] text-white rounded-full px-8 py-3.5 text-sm font-medium tracking-wide shadow-lg shadow-[#d17a9e]/30 hover:bg-[#a8577c] transition-colors mt-2"
+          className="bg-[#d17a9e] text-white rounded-full border-[3px] border-[#2b1b12] px-8 py-3.5 text-sm font-medium tracking-wide shadow-lg shadow-[#d17a9e]/30 hover:bg-[#a8577c] transition-colors mt-2"
         >
           Kirim Konfirmasi
         </button>

@@ -75,13 +75,13 @@ function AcaraLokasi() {
 
       {/* Detail Acara */}
       <div className="flex flex-col sm:flex-row gap-4 mb-12 w-full max-w-lg">
-        <div className="flex-1 bg-white rounded-3xl px-6 py-7 shadow-md shadow-[#c17b5f]/10">
+        <div className="flex-1 bg-white rounded-2xl px-6 py-7 shadow-md shadow-[#c17b5f]/10">
           <h3 className="font-heading text-xl mb-2">Akad Nikah</h3>
           <p className="text-sm text-[#c17b5f] mb-1">{acara.akad.label}</p>
           <p className="text-sm mb-1">{acara.akad.waktu}</p>
           <p className="text-sm text-[#8c7b6f]">{acara.akad.lokasi}</p>
         </div>
-        <div className="flex-1 bg-white rounded-3xl px-6 py-7 shadow-md shadow-[#c17b5f]/10">
+        <div className="flex-1 bg-white rounded-2xl px-6 py-7 shadow-md shadow-[#c17b5f]/10">
           <h3 className="font-heading text-xl mb-2">Resepsi</h3>
           <p className="text-sm text-[#c17b5f] mb-1">{acara.resepsi.label}</p>
           <p className="text-sm mb-1">{acara.resepsi.waktu}</p>

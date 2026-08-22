@@ -25,7 +25,7 @@ function KartuMempelai({
 }) {
   return (
     <motion.div
-      className="flex flex-col items-center bg-white rounded-3xl shadow-md shadow-[#b5654a]/10 px-6 py-8 w-full max-w-[280px]"
+      className="flex items-center gap-5 bg-white rounded-[2rem] shadow-md shadow-[#b5654a]/10 px-6 py-6 w-full max-w-sm"
       variants={fadeUp}
       custom={delay}
       initial="hidden"
@@ -33,17 +33,19 @@ function KartuMempelai({
       viewport={{ once: true, amount: 0.4 }}
     >
       <motion.div
-        className="w-24 h-24 sm:w-28 sm:h-28 rounded-full mb-5 bg-gradient-to-br from-[#ead9c2] to-[#b5654a] overflow-hidden"
+        className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#ead9c2] to-[#b5654a] overflow-hidden border-[3px] border-dashed border-[#b5654a]/40 p-0.5"
         whileHover={{ scale: 1.05 }}
         transition={{ type: "spring", stiffness: 250, damping: 15 }}
       >
-        {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover" /> kalau sudah ada foto */}
+        {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover rounded-full" /> kalau sudah ada foto */}
       </motion.div>
-      <h2 className="font-heading text-2xl text-[#3d2e1f] mb-1">{nama}</h2>
-      <p className="text-xs text-[#b5654a] mb-2 tracking-wide uppercase">
-        {anakKe}
-      </p>
-      <p className="text-sm text-[#9c8b74]">{orangTua}</p>
+      <div className="text-left">
+        <h2 className="font-heading text-xl sm:text-2xl text-[#3d2e1f] mb-1">{nama}</h2>
+        <p className="text-xs text-[#b5654a] mb-1 tracking-wide uppercase">
+          {anakKe}
+        </p>
+        <p className="text-sm text-[#9c8b74]">{orangTua}</p>
+      </div>
     </motion.div>
   );
 }
@@ -79,7 +81,8 @@ function Mempelai() {
         untuk hadir dan memberikan doa restu bagi pernikahan kami:
       </motion.p>
 
-      <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+      {/* Susunan bertumpuk vertikal dengan pembatas bergelombang */}
+      <div className="flex flex-col items-center gap-6 w-full">
         <KartuMempelai
           nama={mempelai.pria.nama}
           anakKe={mempelai.pria.anakKe}
@@ -87,7 +90,15 @@ function Mempelai() {
           delay={0.2}
         />
 
-        <span className="font-heading text-2xl italic text-[#b5654a]">&</span>
+        <svg width="80" height="20" viewBox="0 0 80 20" className="text-[#b5654a]">
+          <path
+            d="M0 10 Q 10 0, 20 10 T 40 10 T 60 10 T 80 10"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
 
         <KartuMempelai
           nama={mempelai.wanita.nama}

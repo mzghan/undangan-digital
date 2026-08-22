@@ -1,32 +1,31 @@
 // frontend/src/pages/demo/PuspaBali/sections/Galeri.tsx
 
 const gradients = [
-  { grad: "from-[#f0e2b8] to-[#c9a24b]", tall: true },
-  { grad: "from-[#c9a24b] to-[#a17c2f]", tall: false },
-  { grad: "from-[#7a1f1f] to-[#d9a7a7]", tall: false },
-  { grad: "from-[#e3c878] to-[#5c1f1f]", tall: false },
-  { grad: "from-[#d9a7a7] to-[#7a1f1f]", tall: true },
-  { grad: "from-[#a17c2f] to-[#e3c878]", tall: false },
+  "from-[#e3c878] to-[#5c1f1f]",
+  "from-[#c9a24b] to-[#2a0e0e]",
+  "from-[#5c1f1f] to-[#e3c878]",
+  "from-[#2a0e0e] to-[#c9a24b]",
+  "from-[#e3c878] to-[#c9a24b]",
+  "from-[#c9a24b] to-[#5c1f1f]",
 ];
 
 function Galeri() {
   return (
     <div
       id="galeri"
-      className="min-h-screen bg-[#fdf8ef] text-[#3a2a1a] flex flex-col items-center px-6 py-20"
+      className="min-h-screen bg-[#2a0e0e] text-[#f5e6c8] flex flex-col items-center px-6 py-20"
     >
-      <p className="tracking-[0.3em] text-xs uppercase text-[#c9a24b] mb-3">
+      <p className="tracking-[0.4em] text-xs uppercase text-[#c9a24b] mb-3">
         Our Moments
       </p>
-      <h2 className="font-heading text-3xl mb-14">Galeri</h2>
+      <h2 className="font-heading text-3xl mb-16">Galeri</h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl w-full">
-        {gradients.map((item, i) => (
+      {/* Medali bundar berselang-seling naik-turun, seperti gerbang pura */}
+      <div className="flex flex-wrap justify-center gap-x-5 gap-y-10 max-w-3xl">
+        {gradients.map((grad, i) => (
           <div
             key={i}
-            className={`rounded-3xl bg-gradient-to-br ${item.grad} shadow-md shadow-[#c9a24b]/10 ${
-              item.tall ? "row-span-2 aspect-[3/5]" : "aspect-square"
-            }`}
+            className={`${i % 2 === 1 ? "mt-8" : ""} w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br ${grad} border-2 border-[#c9a24b]/70 shadow-lg shadow-black/30`}
           />
         ))}
       </div>

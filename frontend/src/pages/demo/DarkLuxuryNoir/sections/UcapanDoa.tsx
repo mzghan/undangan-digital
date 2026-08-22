@@ -60,25 +60,25 @@ function UcapanDoa() {
       {/* Form kirim ucapan */}
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-[#1e1e1e] rounded-3xl shadow-md shadow-[#d4af6a]/10 px-6 py-6 flex flex-col gap-4 mb-10"
+        className="w-full max-w-md bg-[#1e1e1e] rounded-none border border-[#d4af6a]/20 shadow-md shadow-[#d4af6a]/10 px-6 py-6 flex flex-col gap-4 mb-10"
       >
         <input
           type="text"
           value={nama}
           onChange={(e) => setNama(e.target.value)}
           placeholder="Nama kamu"
-          className="w-full bg-[#121212] rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#d4af6a]"
+          className="w-full bg-[#121212] rounded-none border border-[#d4af6a]/20 px-4 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#d4af6a]"
         />
         <textarea
           value={pesan}
           onChange={(e) => setPesan(e.target.value)}
           placeholder="Tulis ucapan & doa..."
           rows={3}
-          className="w-full bg-[#121212] rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#d4af6a] resize-none"
+          className="w-full bg-[#121212] rounded-none border border-[#d4af6a]/20 px-4 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#d4af6a] resize-none"
         />
         <button
           type="submit"
-          className="self-start bg-[#d4af6a] text-white rounded-full px-6 py-2.5 text-sm hover:bg-[#b8933f] transition-colors"
+          className="self-start bg-[#d4af6a] text-white rounded-none px-6 py-2.5 text-sm hover:bg-[#b8933f] transition-colors"
         >
           Kirim Ucapan
         </button>
@@ -89,7 +89,7 @@ function UcapanDoa() {
         {daftarUcapan.map((u) => (
           <div
             key={u.id}
-            className="bg-[#1e1e1e] rounded-2xl shadow-sm shadow-[#d4af6a]/10 px-5 py-4"
+            className="bg-[#1e1e1e] rounded-none border border-[#d4af6a]/20 shadow-sm shadow-[#d4af6a]/10 px-5 py-4"
           >
             <p className="font-heading text-sm text-[#d4af6a] mb-1">
               {u.nama}

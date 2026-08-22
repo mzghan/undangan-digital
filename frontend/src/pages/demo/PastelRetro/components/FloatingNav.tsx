@@ -69,12 +69,12 @@ function scrollToId(id: string) {
 
 function FloatingNav() {
   return (
-    <nav className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 bg-white/80 backdrop-blur-md border border-[#f0d9c9] rounded-full px-2 py-2 shadow-lg shadow-[#d17a9e]/10">
+    <nav className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 bg-white/80 backdrop-blur-md border border-[#f0d9c9] rounded-full border-[3px] border-[#2b1b12] px-2 py-2 shadow-lg shadow-[#d17a9e]/10">
       {navItems.map((item) => (
         <button
           key={item.id}
           onClick={() => scrollToId(item.id)}
-          className="flex flex-col items-center justify-center w-14 py-1.5 rounded-full text-[#9c8577] hover:text-[#d17a9e] hover:bg-[#e0f2e8] transition-colors"
+          className="flex flex-col items-center justify-center w-14 py-1.5 rounded-full border-[3px] border-[#2b1b12] text-[#9c8577] hover:text-[#d17a9e] hover:bg-[#e0f2e8] transition-colors"
         >
           {item.icon}
           <span className="text-[9px] mt-0.5 tracking-wide">{item.label}</span>

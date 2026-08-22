@@ -39,3 +39,5 @@ export const edisi = {
   tanggalTerbit: "Edisi Khusus Pernikahan",
   harga: "Harga: Doa Restu Anda",
 };
+export const musik = "/musik/koran-lama.mp3";
+export const judulMusik = "Musik Latar";

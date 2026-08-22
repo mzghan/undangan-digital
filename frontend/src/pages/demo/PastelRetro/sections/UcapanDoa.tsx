@@ -60,7 +60,7 @@ function UcapanDoa() {
       {/* Form kirim ucapan */}
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white rounded-3xl shadow-md shadow-[#d17a9e]/10 px-6 py-6 flex flex-col gap-4 mb-10"
+        className="w-full max-w-md bg-white rounded-[1.75rem] border-[3px] border-[#2b1b12] shadow-md shadow-[#d17a9e]/10 px-6 py-6 flex flex-col gap-4 mb-10"
       >
         <input
           type="text"
@@ -78,7 +78,7 @@ function UcapanDoa() {
         />
         <button
           type="submit"
-          className="self-start bg-[#d17a9e] text-white rounded-full px-6 py-2.5 text-sm hover:bg-[#a8577c] transition-colors"
+          className="self-start bg-[#d17a9e] text-white rounded-full border-[3px] border-[#2b1b12] px-6 py-2.5 text-sm hover:bg-[#a8577c] transition-colors"
         >
           Kirim Ucapan
         </button>
@@ -89,7 +89,7 @@ function UcapanDoa() {
         {daftarUcapan.map((u) => (
           <div
             key={u.id}
-            className="bg-white rounded-2xl shadow-sm shadow-[#d17a9e]/10 px-5 py-4"
+            className="bg-white rounded-[1.25rem] border-[3px] border-[#2b1b12] shadow-sm shadow-[#d17a9e]/10 px-5 py-4"
           >
             <p className="font-heading text-sm text-[#d17a9e] mb-1">
               {u.nama}

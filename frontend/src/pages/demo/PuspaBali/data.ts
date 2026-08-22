@@ -32,3 +32,5 @@ export const acara = {
 };
 
 export const tamuDefault = "Bapak/Ibu/Saudara/i";
+export const musik = "/musik/puspa-bali.mp3";
+export const judulMusik = "Musik Latar";

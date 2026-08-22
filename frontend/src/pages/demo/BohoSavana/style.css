@@ -1,0 +1,10 @@
+/* Boho Savana — hangat, organik, earthy */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Quicksand:wght@400;500;600&display=swap');
+
+.tema-boho-savana {
+  font-family: 'Quicksand', sans-serif;
+}
+.tema-boho-savana .font-heading {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+}

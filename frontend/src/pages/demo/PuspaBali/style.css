@@ -1,0 +1,10 @@
+/* Puspa Bali — anggun, tropis, ornamental */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+.tema-puspa-bali {
+  font-family: 'EB Garamond', serif;
+}
+.tema-puspa-bali .font-heading {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.03em;
+}

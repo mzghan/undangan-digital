@@ -60,7 +60,7 @@ function UcapanDoa() {
       {/* Form kirim ucapan */}
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white rounded-3xl shadow-md shadow-[#c9a06e]/10 px-6 py-6 flex flex-col gap-4 mb-10"
+        className="w-full max-w-md bg-white rounded-none border border-[#c9a06e]/25  px-6 py-6 flex flex-col gap-4 mb-10"
       >
         <input
           type="text"
@@ -89,7 +89,7 @@ function UcapanDoa() {
         {daftarUcapan.map((u) => (
           <div
             key={u.id}
-            className="bg-white rounded-2xl shadow-sm shadow-[#c9a06e]/10 px-5 py-4"
+            className="bg-white rounded-none border border-[#c9a06e]/25  px-5 py-4"
           >
             <p className="font-heading text-sm text-[#c9a06e] mb-1">
               {u.nama}

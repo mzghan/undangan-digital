@@ -61,7 +61,7 @@ function AcaraLokasi() {
         ].map((item) => (
           <div
             key={item.label}
-            className="flex flex-col items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl shadow-md shadow-[#c9a24b]/10"
+            className="flex flex-col items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-white rounded-none border border-[#c9a24b]/40 shadow-md shadow-[#c9a24b]/10"
           >
             <span className="font-heading text-xl md:text-2xl text-[#c9a24b]">
               {String(item.value).padStart(2, "0")}
@@ -75,13 +75,13 @@ function AcaraLokasi() {
 
       {/* Detail Acara */}
       <div className="flex flex-col sm:flex-row gap-4 mb-12 w-full max-w-lg">
-        <div className="flex-1 bg-white rounded-3xl px-6 py-7 shadow-md shadow-[#c9a24b]/10">
+        <div className="flex-1 bg-white rounded-none border border-[#c9a24b]/40 px-6 py-7 shadow-md shadow-[#c9a24b]/10">
           <h3 className="font-heading text-xl mb-2">Upacara Pawiwahan</h3>
           <p className="text-sm text-[#c9a24b] mb-1">{acara.akad.label}</p>
           <p className="text-sm mb-1">{acara.akad.waktu}</p>
           <p className="text-sm text-[#8a7f6b]">{acara.akad.lokasi}</p>
         </div>
-        <div className="flex-1 bg-white rounded-3xl px-6 py-7 shadow-md shadow-[#c9a24b]/10">
+        <div className="flex-1 bg-white rounded-none border border-[#c9a24b]/40 px-6 py-7 shadow-md shadow-[#c9a24b]/10">
           <h3 className="font-heading text-xl mb-2">Resepsi</h3>
           <p className="text-sm text-[#c9a24b] mb-1">{acara.resepsi.label}</p>
           <p className="text-sm mb-1">{acara.resepsi.waktu}</p>

@@ -1,0 +1,10 @@
+/* Koran Lama — koran jadul, editorial klasik */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,600&family=Old+Standard+TT:ital,wght@0,400;1,400&display=swap');
+
+.tema-koran-lama {
+  font-family: 'Old Standard TT', serif;
+}
+.tema-koran-lama .font-black {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+}

@@ -1,33 +1,38 @@
 // frontend/src/pages/demo/FloralBlanc/sections/Galeri.tsx
 
 const gradients = [
-  { grad: "from-[#faeaea] to-[#c9a06e]", tall: true },
-  { grad: "from-[#c9a06e] to-[#a8794a]", tall: false },
-  { grad: "from-[#a8bfa0] to-[#cfe0c8]", tall: false },
-  { grad: "from-[#e8c9c9] to-[#9c6b6b]", tall: false },
-  { grad: "from-[#cfe0c8] to-[#a8bfa0]", tall: true },
-  { grad: "from-[#a8794a] to-[#e8c9c9]", tall: false },
+  "from-[#ead9d0] to-[#c9a06e]",
+  "from-[#c9a06e] to-[#9c6b6b]",
+  "from-[#e8c9c9] to-[#c9a06e]",
+  "from-[#9c6b6b] to-[#e8c9c9]",
 ];
+
+const captions = ["Perkenalan", "Lamaran", "Prewedding", "Kebersamaan"];
 
 function Galeri() {
   return (
     <div
       id="galeri"
-      className="min-h-screen bg-[#fffaf7] text-[#3a3a3a] flex flex-col items-center px-6 py-20"
+      className="min-h-screen bg-white text-[#5c4a45] flex flex-col items-center px-6 py-20"
     >
-      <p className="tracking-[0.3em] text-xs uppercase text-[#c9a06e] mb-3">
-        Our Moments
-      </p>
-      <h2 className="font-heading text-3xl mb-14">Galeri</h2>
+      <p className="font-script text-2xl text-[#c9a06e] mb-2">Our Story</p>
+      <h2 className="font-heading text-2xl mb-14 uppercase tracking-widest">Galeri</h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl w-full">
-        {gradients.map((item, i) => (
+      {/* Satu kolom vertikal, foto berselang-seling kiri/kanan seperti editorial */}
+      <div className="w-full max-w-sm flex flex-col gap-14">
+        {gradients.map((grad, i) => (
           <div
             key={i}
-            className={`rounded-3xl bg-gradient-to-br ${item.grad} shadow-md shadow-[#c9a06e]/10 ${
-              item.tall ? "row-span-2 aspect-[3/5]" : "aspect-square"
-            }`}
-          />
+            className={`flex items-center gap-4 ${i % 2 === 1 ? "flex-row-reverse text-right" : ""}`}
+          >
+            <div className={`w-32 h-40 shrink-0 bg-gradient-to-br ${grad} border border-[#c9a06e]/30`} />
+            <div>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-[#a8794a] mb-1">
+                {String(i + 1).padStart(2, "0")}
+              </p>
+              <p className="font-heading text-lg">{captions[i]}</p>
+            </div>
+          </div>
         ))}
       </div>
     </div>

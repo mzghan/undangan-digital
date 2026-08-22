@@ -61,7 +61,7 @@ function AcaraLokasi() {
         ].map((item) => (
           <div
             key={item.label}
-            className="flex flex-col items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl shadow-md shadow-[#b5654a]/10"
+            className="flex flex-col items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-white rounded-[1.5rem] shadow-md shadow-[#b5654a]/10"
           >
             <span className="font-heading text-xl md:text-2xl text-[#b5654a]">
               {String(item.value).padStart(2, "0")}
@@ -75,13 +75,13 @@ function AcaraLokasi() {
 
       {/* Detail Acara */}
       <div className="flex flex-col sm:flex-row gap-4 mb-12 w-full max-w-lg">
-        <div className="flex-1 bg-white rounded-3xl px-6 py-7 shadow-md shadow-[#b5654a]/10">
+        <div className="flex-1 bg-white rounded-[2rem] px-6 py-7 shadow-md shadow-[#b5654a]/10">
           <h3 className="font-heading text-xl mb-2">Akad Nikah</h3>
           <p className="text-sm text-[#b5654a] mb-1">{acara.akad.label}</p>
           <p className="text-sm mb-1">{acara.akad.waktu}</p>
           <p className="text-sm text-[#9c8b74]">{acara.akad.lokasi}</p>
         </div>
-        <div className="flex-1 bg-white rounded-3xl px-6 py-7 shadow-md shadow-[#b5654a]/10">
+        <div className="flex-1 bg-white rounded-[2rem] px-6 py-7 shadow-md shadow-[#b5654a]/10">
           <h3 className="font-heading text-xl mb-2">Resepsi</h3>
           <p className="text-sm text-[#b5654a] mb-1">{acara.resepsi.label}</p>
           <p className="text-sm mb-1">{acara.resepsi.waktu}</p>

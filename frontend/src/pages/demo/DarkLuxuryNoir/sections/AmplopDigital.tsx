@@ -49,7 +49,7 @@ function AmplopDigital() {
         {daftarRekening.map((r) => (
           <div
             key={r.id}
-            className="bg-[#1e1e1e] rounded-2xl shadow-md shadow-[#d4af6a]/10 px-5 py-4 flex items-center justify-between"
+            className="bg-[#1e1e1e] rounded-none border border-[#d4af6a]/20 shadow-md shadow-[#d4af6a]/10 px-5 py-4 flex items-center justify-between"
           >
             <div>
               <p className="font-heading text-lg">{r.bank}</p>
@@ -60,7 +60,7 @@ function AmplopDigital() {
             </div>
             <button
               onClick={() => handleCopy(r.nomor, r.id)}
-              className="text-xs bg-[#d4af6a] text-white rounded-full px-4 py-2 hover:bg-[#b8933f] transition-colors whitespace-nowrap"
+              className="text-xs bg-[#d4af6a] text-white rounded-none px-4 py-2 hover:bg-[#b8933f] transition-colors whitespace-nowrap"
             >
               {tersalin === r.id ? "Tersalin!" : "Salin"}
             </button>

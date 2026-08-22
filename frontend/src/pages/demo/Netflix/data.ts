@@ -49,3 +49,5 @@ export const episodes = [
   { nomor: 5, judul: "Hari Bahagia" },
   { nomor: 6, judul: "Selamanya" },
 ];
+export const musik = "/musik/netflix.mp3";
+export const judulMusik = "Musik Latar";

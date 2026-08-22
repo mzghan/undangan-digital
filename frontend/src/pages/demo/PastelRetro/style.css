@@ -1,0 +1,10 @@
+/* Pastel Retro — groovy, ceria, chunky */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap');
+
+.tema-pastel-retro {
+  font-family: 'Space Grotesk', sans-serif;
+}
+.tema-pastel-retro .font-heading {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+}

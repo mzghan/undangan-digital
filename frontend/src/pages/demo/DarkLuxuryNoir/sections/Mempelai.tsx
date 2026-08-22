@@ -1,7 +1,6 @@
 // frontend/src/pages/demo/DarkLuxuryNoir/sections/Mempelai.tsx
 import { motion, type Variants } from "framer-motion";
 import { mempelai } from "../data";
-import BlobDecor from "../components/BlobDecor";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -12,38 +11,36 @@ const fadeUp: Variants = {
   }),
 };
 
-function KartuMempelai({
+function ProfilMempelai({
   nama,
   anakKe,
   orangTua,
+  align,
   delay,
 }: {
   nama: string;
   anakKe: string;
   orangTua: string;
+  align: "left" | "right";
   delay: number;
 }) {
   return (
     <motion.div
-      className="flex flex-col items-center bg-[#1e1e1e] rounded-3xl shadow-md shadow-[#d4af6a]/10 px-6 py-8 w-full max-w-[280px]"
+      className={`flex flex-col ${align === "left" ? "items-start text-left" : "items-end text-right sm:items-start sm:text-left"} gap-3`}
       variants={fadeUp}
       custom={delay}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.4 }}
     >
-      <motion.div
-        className="w-24 h-24 sm:w-28 sm:h-28 rounded-full mb-5 bg-gradient-to-br from-[#2a2a2a] to-[#d4af6a] overflow-hidden"
-        whileHover={{ scale: 1.05 }}
-        transition={{ type: "spring", stiffness: 250, damping: 15 }}
-      >
+      <div className="w-20 h-28 sm:w-24 sm:h-32 border border-[#d4af6a]/40 bg-gradient-to-br from-[#2a2a2a] to-black">
         {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover" /> kalau sudah ada foto */}
-      </motion.div>
-      <h2 className="font-heading text-2xl text-[#f0ede6] mb-1">{nama}</h2>
-      <p className="text-xs text-[#d4af6a] mb-2 tracking-wide uppercase">
+      </div>
+      <h2 className="font-heading text-3xl text-[#f0ede6]">{nama}</h2>
+      <p className="text-[10px] uppercase tracking-[0.25em] text-[#d4af6a]">
         {anakKe}
       </p>
-      <p className="text-sm text-[#b0a894]">{orangTua}</p>
+      <p className="text-sm text-[#8a8a8a] max-w-[220px]">{orangTua}</p>
     </motion.div>
   );
 }
@@ -52,48 +49,39 @@ function Mempelai() {
   return (
     <div
       id="mempelai"
-      className="relative min-h-screen bg-[#121212] text-[#f0ede6] flex flex-col items-center justify-center px-5 sm:px-10 py-20 text-center overflow-hidden"
+      className="relative min-h-screen bg-[#121212] text-[#f0ede6] flex flex-col items-center justify-center px-6 sm:px-14 py-24 overflow-hidden"
     >
-      <BlobDecor posisi="top-left" warna="#d4af6a" />
-      <BlobDecor posisi="bottom-right" warna="#8a8a8a" />
-
       <motion.p
-        className="tracking-[0.3em] text-[10px] sm:text-xs uppercase text-[#d4af6a] mb-4"
+        className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-[#d4af6a] mb-16"
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
       >
-        With love
+        Mempelai
       </motion.p>
 
-      <motion.p
-        className="max-w-sm text-sm sm:text-base text-[#b0a894] mb-12 leading-relaxed"
-        variants={fadeUp}
-        custom={0.1}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i
-        untuk hadir dan memberikan doa restu bagi pernikahan kami:
-      </motion.p>
-
-      <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
-        <KartuMempelai
+      <div className="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-10 sm:gap-6 items-start">
+        <ProfilMempelai
           nama={mempelai.pria.nama}
           anakKe={mempelai.pria.anakKe}
           orangTua={mempelai.pria.orangTua}
-          delay={0.2}
+          align="left"
+          delay={0.1}
         />
 
-        <span className="font-heading text-2xl italic text-[#d4af6a]">&</span>
+        <div className="hidden sm:flex flex-col items-center justify-start pt-10">
+          <span className="w-px h-24 bg-[#d4af6a]/40" />
+          <span className="font-heading text-2xl italic text-[#d4af6a] my-2">&amp;</span>
+          <span className="w-px h-24 bg-[#d4af6a]/40" />
+        </div>
 
-        <KartuMempelai
+        <ProfilMempelai
           nama={mempelai.wanita.nama}
           anakKe={mempelai.wanita.anakKe}
           orangTua={mempelai.wanita.orangTua}
-          delay={0.4}
+          align="right"
+          delay={0.3}
         />
       </div>
     </div>

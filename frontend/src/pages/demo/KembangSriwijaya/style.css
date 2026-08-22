@@ -1,1 +1,9 @@
-    
+/* Kembang Sriwijaya — songket, budaya, keemasan */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Marcellus&display=swap');
+
+.tema-kembang-sriwijaya {
+  font-family: 'Marcellus', serif;
+}
+.tema-kembang-sriwijaya .font-serif {
+  font-family: 'Cinzel Decorative', serif;
+}
