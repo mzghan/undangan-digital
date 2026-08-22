@@ -1,9 +1,14 @@
 // frontend/src/pages/demo/KoranLama/sections/Penutup.tsx
 import { mempelai } from "../data";
+import { motion } from "framer-motion";
 
 function Penutup() {
   return (
-    <div className="min-h-screen bg-[#f4ecd8] text-[#2b2620] font-serif flex flex-col items-center justify-center px-6 py-20 pb-28 text-center">
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }} className="min-h-screen bg-[#f4ecd8] text-[#2b2620] font-serif flex flex-col items-center justify-center px-6 py-20 pb-28 text-center">
       <div className="w-16 h-[2px] bg-[#2b2620] mb-8" />
 
       <p className="max-w-md text-sm leading-relaxed mb-8 italic text-justify">
@@ -28,7 +33,7 @@ function Penutup() {
       <div className="mt-16 pt-6 border-t-4 border-double border-[#2b2620] text-[10px] tracking-widest uppercase">
         Warta Pawiwahan — Edisi Terakhir · Tamat
       </div>
-    </div>
+    </motion.div>
   );
 }
 

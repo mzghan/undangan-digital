@@ -1,10 +1,10 @@
 // frontend/src/pages/demo/SenjaAesthetic/sections/Cover.tsx
-import { mempelai, tamuDefault } from "../data";
+import { mempelai, tamuDefault, foto } from "../data";
 
 function Cover({ onBuka }: { onBuka: () => void }) {
   return (
     <div className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-gradient-to-br from-[#f2c19a] via-[#c17b5f] to-[#5a3a2e]">
-      {/* Ganti div ini dengan <img src="..." className="absolute inset-0 w-full h-full object-cover" /> kalau sudah ada foto */}
+      <img src={foto.cover} alt={`${mempelai.pria.panggilan} & ${mempelai.wanita.panggilan}`} className="absolute inset-0 w-full h-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
       <div className="relative z-10 flex flex-col items-start text-left px-8 sm:px-14 pb-16 sm:pb-20 max-w-lg text-white">

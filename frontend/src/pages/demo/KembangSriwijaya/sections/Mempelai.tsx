@@ -1,6 +1,6 @@
 // frontend/src/pages/demo/KembangSriwijaya/sections/Mempelai.tsx
 import { motion, type Variants } from "framer-motion";
-import { mempelai } from "../data";
+import { mempelai, foto } from "../data";
 import SongketMotif from "../components/SongketMotif";
 
 const fadeUp: Variants = {
@@ -17,11 +17,13 @@ function ProfilMempelai({
   anakKe,
   orangTua,
   delay,
+  foto,
 }: {
   nama: string;
   anakKe: string;
   orangTua: string;
   delay: number;
+  foto: string;
 }) {
   return (
     <motion.div
@@ -37,7 +39,7 @@ function ProfilMempelai({
         whileHover={{ scale: 1.06 }}
         transition={{ type: "spring", stiffness: 250, damping: 15 }}
       >
-        {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover" /> kalau sudah ada foto */}
+        <img src={foto} alt={nama} className="w-full h-full object-cover" />
       </motion.div>
       <h2 className="font-serif text-xl sm:text-2xl md:text-3xl text-[#4a0e14] mb-1">
         {nama}
@@ -54,7 +56,11 @@ function ProfilMempelai({
 
 function Mempelai() {
   return (
-    <div className="relative min-h-screen bg-[#fff8ec] text-[#4a0e14] flex flex-col items-center justify-center px-5 sm:px-8 md:px-12 py-16 sm:py-20 text-center overflow-hidden">
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }} className="relative min-h-screen bg-[#fff8ec] text-[#4a0e14] flex flex-col items-center justify-center px-5 sm:px-8 md:px-12 py-16 sm:py-20 text-center overflow-hidden">
       <SongketMotif posisi="top-left" />
       <SongketMotif posisi="bottom-right" />
       <motion.div
@@ -94,6 +100,7 @@ function Mempelai() {
           anakKe={mempelai.pria.anakKe}
           orangTua={mempelai.pria.orangTua}
           delay={0.3}
+          foto={foto.pria}
         />
 
         <motion.span
@@ -112,6 +119,7 @@ function Mempelai() {
           anakKe={mempelai.wanita.anakKe}
           orangTua={mempelai.wanita.orangTua}
           delay={0.5}
+          foto={foto.wanita}
         />
       </div>
 
@@ -123,7 +131,7 @@ function Mempelai() {
         whileInView="visible"
         viewport={{ once: true }}
       />
-    </div>
+    </motion.div>
   );
 }
 

@@ -1,6 +1,6 @@
 // frontend/src/pages/demo/Netflix/sections/Mempelai.tsx
 import { motion, type Variants } from "framer-motion";
-import { mempelai } from "../data";
+import { mempelai, foto } from "../data";
 import PlayMotif from "../components/PlayMotif";
 
 const fadeUp: Variants = {
@@ -17,11 +17,13 @@ function KartuCast({
   anakKe,
   orangTua,
   delay,
+  foto,
 }: {
   nama: string;
   anakKe: string;
   orangTua: string;
   delay: number;
+  foto: string;
 }) {
   return (
     <motion.div
@@ -37,7 +39,7 @@ function KartuCast({
         whileHover={{ scale: 1.05 }}
         transition={{ type: "spring", stiffness: 250, damping: 15 }}
       >
-        {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover" /> kalau sudah ada foto */}
+        <img src={foto} alt={nama} className="w-full h-full object-cover" />
       </motion.div>
       <p className="text-[10px] uppercase tracking-widest text-[#E50914] font-bold mb-2">
         Starring
@@ -53,7 +55,11 @@ function KartuCast({
 
 function Mempelai() {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       id="mempelai"
       className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center px-5 sm:px-10 py-20 text-center overflow-hidden"
     >
@@ -88,6 +94,7 @@ function Mempelai() {
           anakKe={mempelai.pria.anakKe}
           orangTua={mempelai.pria.orangTua}
           delay={0.2}
+          foto={foto.pria}
         />
 
         <span className="font-black text-2xl text-[#E50914]">&</span>
@@ -97,9 +104,10 @@ function Mempelai() {
           anakKe={mempelai.wanita.anakKe}
           orangTua={mempelai.wanita.orangTua}
           delay={0.4}
+          foto={foto.wanita}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

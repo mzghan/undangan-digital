@@ -1,17 +1,16 @@
+import { motion } from "framer-motion";
 // frontend/src/pages/demo/SenjaAesthetic/sections/Galeri.tsx
+import { foto } from "../data";
 
-const items = [
-  { grad: "from-[#f2c19a] to-[#c17b5f]", h: "h-56" },
-  { grad: "from-[#c17b5f] to-[#8a5a45]", h: "h-40" },
-  { grad: "from-[#8a5a45] to-[#f2c19a]", h: "h-48" },
-  { grad: "from-[#f2c19a] to-[#8a5a45]", h: "h-36" },
-  { grad: "from-[#c17b5f] to-[#f2c19a]", h: "h-52" },
-  { grad: "from-[#8a5a45] to-[#c17b5f]", h: "h-44" },
-];
+const tinggi = ["h-56", "h-40", "h-48", "h-36", "h-52", "h-44"];
 
 function Galeri() {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       id="galeri"
       className="min-h-screen bg-[#faf5f0] text-[#3d2a22] flex flex-col items-center px-6 py-20"
     >
@@ -21,15 +20,17 @@ function Galeri() {
       <h2 className="font-heading text-3xl mb-14">Galeri</h2>
 
       {/* Masonry modern — tinggi bervariasi via CSS columns */}
-      <div className="w-full max-w-3xl columns-2 md:columns-3 gap-4 [column-fill:_balance]">
-        {items.map((item, i) => (
+      <div className="w-full max-w-3xl lg:max-w-5xl columns-2 md:columns-3 lg:columns-4 gap-4 [column-fill:_balance]">
+        {foto.galeri.map((src, i) => (
           <div
             key={i}
-            className={`mb-4 break-inside-avoid rounded-xl ${item.h} bg-gradient-to-br ${item.grad} shadow-md shadow-[#c17b5f]/10`}
-          />
+            className={`mb-4 break-inside-avoid rounded-xl overflow-hidden ${tinggi[i % tinggi.length]} shadow-md shadow-[#c17b5f]/10`}
+          >
+            <img src={src} alt={`Momen ${i + 1}`} className="w-full h-full object-cover" />
+          </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

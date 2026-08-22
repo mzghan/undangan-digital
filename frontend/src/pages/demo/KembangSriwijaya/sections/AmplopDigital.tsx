@@ -1,5 +1,6 @@
 // frontend/src/pages/demo/KembangSriwijaya/sections/AmplopDigital.tsx
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 type Rekening = {
   id: number;
@@ -32,7 +33,11 @@ function AmplopDigital() {
   };
 
   return (
-    <div className="min-h-screen bg-[#2b1b12] text-[#f5e9d6] flex flex-col items-center px-6 py-20">
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }} className="min-h-screen bg-[#2b1b12] text-[#f5e9d6] flex flex-col items-center px-6 py-20">
       <p className="tracking-[0.3em] text-xs uppercase text-[#d9b98a] mb-3">
         Tanda Kasih
       </p>
@@ -62,7 +67,7 @@ function AmplopDigital() {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

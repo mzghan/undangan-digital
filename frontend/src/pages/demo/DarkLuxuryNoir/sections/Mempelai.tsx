@@ -1,6 +1,6 @@
 // frontend/src/pages/demo/DarkLuxuryNoir/sections/Mempelai.tsx
 import { motion, type Variants } from "framer-motion";
-import { mempelai } from "../data";
+import { mempelai, foto } from "../data";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -17,12 +17,14 @@ function ProfilMempelai({
   orangTua,
   align,
   delay,
+  foto,
 }: {
   nama: string;
   anakKe: string;
   orangTua: string;
   align: "left" | "right";
   delay: number;
+  foto: string;
 }) {
   return (
     <motion.div
@@ -34,7 +36,7 @@ function ProfilMempelai({
       viewport={{ once: true, amount: 0.4 }}
     >
       <div className="w-20 h-28 sm:w-24 sm:h-32 border border-[#d4af6a]/40 bg-gradient-to-br from-[#2a2a2a] to-black">
-        {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover" /> kalau sudah ada foto */}
+        <img src={foto} alt={nama} className="w-full h-full object-cover" />
       </div>
       <h2 className="font-heading text-3xl text-[#f0ede6]">{nama}</h2>
       <p className="text-[10px] uppercase tracking-[0.25em] text-[#d4af6a]">
@@ -47,7 +49,11 @@ function ProfilMempelai({
 
 function Mempelai() {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       id="mempelai"
       className="relative min-h-screen bg-[#121212] text-[#f0ede6] flex flex-col items-center justify-center px-6 sm:px-14 py-24 overflow-hidden"
     >
@@ -68,6 +74,7 @@ function Mempelai() {
           orangTua={mempelai.pria.orangTua}
           align="left"
           delay={0.1}
+          foto={foto.pria}
         />
 
         <div className="hidden sm:flex flex-col items-center justify-start pt-10">
@@ -82,9 +89,10 @@ function Mempelai() {
           orangTua={mempelai.wanita.orangTua}
           align="right"
           delay={0.3}
+          foto={foto.wanita}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

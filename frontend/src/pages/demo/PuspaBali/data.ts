@@ -1,4 +1,5 @@
 // frontend/src/pages/demo/PuspaBali/data.ts
+import { fotoPria, fotoWanita, ambilFotoPrewed } from "../../../data/fotoDemo";
 
 export const mempelai = {
   pria: {
@@ -34,3 +35,9 @@ export const acara = {
 export const tamuDefault = "Bapak/Ibu/Saudara/i";
 export const musik = "/musik/puspa-bali.mp3";
 export const judulMusik = "Musik Latar";
+export const foto = {
+  cover: ambilFotoPrewed(7, 1)[0],
+  pria: fotoPria[1],
+  wanita: fotoWanita[1],
+  galeri: ambilFotoPrewed(1, 6),
+};

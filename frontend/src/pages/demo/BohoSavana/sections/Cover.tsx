@@ -1,5 +1,5 @@
 // frontend/src/pages/demo/BohoSavana/sections/Cover.tsx
-import { mempelai, tamuDefault } from "../data";
+import { mempelai, tamuDefault, foto } from "../data";
 
 function Cover({ onBuka }: { onBuka: () => void }) {
   return (
@@ -13,8 +13,8 @@ function Cover({ onBuka }: { onBuka: () => void }) {
         </p>
 
         {/* Bingkai lengkung ala gapura, foto di dalamnya */}
-        <div className="relative w-56 sm:w-64 aspect-[4/5] rounded-t-[9999px] rounded-b-3xl overflow-hidden bg-gradient-to-b from-[#ddb98a] via-[#b5654a] to-[#6b4230] shadow-xl shadow-[#6b4230]/20 mb-8 border-4 border-white">
-          {/* Ganti div ini dengan <img src="..." className="absolute inset-0 w-full h-full object-cover" /> kalau sudah ada foto */}
+        <div className="relative w-56 sm:w-64 lg:w-72 aspect-[4/5] rounded-t-[9999px] rounded-b-3xl overflow-hidden bg-gradient-to-b from-[#ddb98a] via-[#b5654a] to-[#6b4230] shadow-xl shadow-[#6b4230]/20 mb-8 border-4 border-white">
+          <img src={foto.cover} alt={`${mempelai.pria.panggilan} & ${mempelai.wanita.panggilan}`} className="absolute inset-0 w-full h-full object-cover" />
         </div>
 
         <h1 className="font-heading text-4xl sm:text-5xl leading-tight mb-1">

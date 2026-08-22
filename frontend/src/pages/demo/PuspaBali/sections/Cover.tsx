@@ -1,5 +1,5 @@
 // frontend/src/pages/demo/PuspaBali/sections/Cover.tsx
-import { mempelai, tamuDefault } from "../data";
+import { mempelai, tamuDefault, foto } from "../data";
 
 function Cover({ onBuka }: { onBuka: () => void }) {
   return (
@@ -22,7 +22,7 @@ function Cover({ onBuka }: { onBuka: () => void }) {
           className="w-40 h-44 bg-gradient-to-b from-[#e3c878] via-[#c9a24b] to-[#5c1f1f] mb-8 border-2 border-[#e3c878]/70"
           style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
         >
-          {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover" style={{clipPath: "inherit"}} /> kalau sudah ada foto */}
+          <img src={foto.cover} alt={`${mempelai.pria.panggilan} & ${mempelai.wanita.panggilan}`} className="w-full h-full object-cover" style={{ clipPath: "inherit" }} />
         </div>
 
         <h1 className="font-heading text-4xl sm:text-5xl leading-tight mb-1 text-[#f5e6c8]">

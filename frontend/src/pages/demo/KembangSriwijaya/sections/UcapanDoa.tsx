@@ -1,5 +1,6 @@
 // frontend/src/pages/demo/KembangSriwijaya/sections/UcapanDoa.tsx
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 type Ucapan = {
   id: number;
@@ -50,7 +51,11 @@ function UcapanDoa() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5e9d6] text-[#2b1b12] flex flex-col items-center px-6 py-20">
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }} className="min-h-screen bg-[#f5e9d6] text-[#2b1b12] flex flex-col items-center px-6 py-20">
       <p className="tracking-[0.3em] text-xs uppercase text-[#8a5a2b] mb-3">
         Doa Restu
       </p>
@@ -95,7 +100,7 @@ function UcapanDoa() {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

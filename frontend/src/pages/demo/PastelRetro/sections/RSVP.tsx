@@ -1,6 +1,7 @@
 // frontend/src/pages/demo/PastelRetro/sections/RSVP.tsx
 import { useState } from "react";
 import type { FormEvent } from "react";
+import { motion } from "framer-motion";
 
 type StatusKehadiran = "hadir" | "tidak-hadir" | "";
 
@@ -45,7 +46,11 @@ function RSVP() {
   }
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       id="rsvp"
       className="min-h-screen bg-[#e0f2e8] text-[#5b4636] flex flex-col items-center px-6 py-20"
     >
@@ -124,7 +129,7 @@ function RSVP() {
           Kirim Konfirmasi
         </button>
       </form>
-    </div>
+    </motion.div>
   );
 }
 

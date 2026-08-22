@@ -1,6 +1,6 @@
 // frontend/src/pages/demo/PastelRetro/sections/Mempelai.tsx
 import { motion, type Variants } from "framer-motion";
-import { mempelai } from "../data";
+import { mempelai, foto } from "../data";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24, rotate: -2 },
@@ -18,12 +18,14 @@ function KartuMempelai({
   orangTua,
   rot,
   delay,
+  foto,
 }: {
   nama: string;
   anakKe: string;
   orangTua: string;
   rot: string;
   delay: number;
+  foto: string;
 }) {
   return (
     <motion.div
@@ -36,7 +38,7 @@ function KartuMempelai({
       whileHover={{ rotate: 0, scale: 1.03 }}
     >
       <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full mb-5 bg-gradient-to-br from-[#ffd9b3] to-[#d17a9e] border-[3px] border-[#2b1b12] overflow-hidden">
-        {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover" /> kalau sudah ada foto */}
+        <img src={foto} alt={nama} className="w-full h-full object-cover" />
       </div>
       <h2 className="font-heading text-2xl text-[#2b1b12] mb-1">{nama}</h2>
       <p className="text-xs text-[#a8577c] mb-2 tracking-wide uppercase font-semibold">
@@ -49,7 +51,11 @@ function KartuMempelai({
 
 function Mempelai() {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       id="mempelai"
       className="relative min-h-screen bg-[#fff3e4] text-[#2b1b12] flex flex-col items-center justify-center px-5 sm:px-10 py-20 text-center overflow-hidden"
     >
@@ -85,6 +91,7 @@ function Mempelai() {
           orangTua={mempelai.pria.orangTua}
           rot="-rotate-2"
           delay={0.2}
+          foto={foto.pria}
         />
 
         <span className="font-heading text-3xl text-[#a8577c]">+</span>
@@ -95,9 +102,10 @@ function Mempelai() {
           orangTua={mempelai.wanita.orangTua}
           rot="rotate-2"
           delay={0.4}
+          foto={foto.wanita}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

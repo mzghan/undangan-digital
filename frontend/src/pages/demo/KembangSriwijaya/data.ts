@@ -1,4 +1,5 @@
 // frontend/src/pages/demo/KembangSriwijaya/data.ts
+import { fotoPria, fotoWanita, ambilFotoPrewed } from "../../../data/fotoDemo";
 
 export const mempelai = {
   pria: {
@@ -34,3 +35,8 @@ export const acara = {
 export const tamuDefault = "Bapak/Ibu/Saudara/i";
 export const musik = "/musik/kembang-sriwijaya.mp3";
 export const judulMusik = "Musik Latar";
+export const foto = {
+  pria: fotoPria[1],
+  wanita: fotoWanita[0],
+  galeri: ambilFotoPrewed(5, 6),
+};

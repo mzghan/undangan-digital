@@ -1,6 +1,6 @@
 // frontend/src/pages/demo/KoranLama/sections/Mempelai.tsx
 import { motion, type Variants } from "framer-motion";
-import { mempelai } from "../data";
+import { mempelai, foto } from "../data";
 import OrnamenKoran from "../components/OrnamenKoran";
 
 const fadeUp: Variants = {
@@ -17,11 +17,13 @@ function ProfilMempelai({
   anakKe,
   orangTua,
   delay,
+  foto,
 }: {
   nama: string;
   anakKe: string;
   orangTua: string;
   delay: number;
+  foto: string;
 }) {
   return (
     <motion.div
@@ -33,7 +35,7 @@ function ProfilMempelai({
       viewport={{ once: true, amount: 0.4 }}
     >
       <div className="w-24 h-24 sm:w-28 sm:h-28 border-2 border-[#2b2620] mb-4 bg-[repeating-linear-gradient(45deg,_#2b2620_0,_#2b2620_1px,_transparent_1px,_transparent_9px)] opacity-70">
-        {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover grayscale" /> kalau sudah ada foto */}
+        <img src={foto} alt={nama} className="w-full h-full object-cover grayscale" />
       </div>
       <h2 className="font-black text-2xl mb-1 uppercase tracking-tight">
         {nama}
@@ -46,7 +48,11 @@ function ProfilMempelai({
 
 function Mempelai() {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       id="mempelai"
       className="relative min-h-screen bg-[#f4ecd8] text-[#2b2620] font-serif flex flex-col items-center justify-center px-5 sm:px-10 py-16 sm:py-20 text-center overflow-hidden"
     >
@@ -84,6 +90,7 @@ function Mempelai() {
           anakKe={mempelai.pria.anakKe}
           orangTua={mempelai.pria.orangTua}
           delay={0.3}
+          foto={foto.pria}
         />
 
         <span className="font-black text-3xl italic">&</span>
@@ -93,11 +100,12 @@ function Mempelai() {
           anakKe={mempelai.wanita.anakKe}
           orangTua={mempelai.wanita.orangTua}
           delay={0.5}
+          foto={foto.wanita}
         />
       </div>
 
       <div className="w-16 h-[2px] bg-[#2b2620] mt-14 sm:mt-16" />
-    </div>
+    </motion.div>
   );
 }
 

@@ -1,5 +1,5 @@
 // frontend/src/pages/demo/FloralBlanc/sections/Cover.tsx
-import { mempelai, tamuDefault } from "../data";
+import { mempelai, tamuDefault, foto } from "../data";
 
 function Cover({ onBuka }: { onBuka: () => void }) {
   return (
@@ -10,8 +10,8 @@ function Cover({ onBuka }: { onBuka: () => void }) {
           <p className="font-script text-2xl text-[#c9a06e] mb-6">Undangan Pernikahan</p>
 
           {/* Foto oval kecil di atas */}
-          <div className="w-28 h-36 rounded-[50%] overflow-hidden bg-gradient-to-b from-[#e8c9c9] via-[#c9a06e] to-[#9c6b6b] mb-8 border border-[#c9a06e]/40">
-            {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover" /> kalau sudah ada foto */}
+          <div className="w-28 h-36 lg:w-32 lg:h-40 rounded-[50%] overflow-hidden bg-gradient-to-b from-[#e8c9c9] via-[#c9a06e] to-[#9c6b6b] mb-8 border border-[#c9a06e]/40">
+            <img src={foto.cover} alt={`${mempelai.pria.panggilan} & ${mempelai.wanita.panggilan}`} className="w-full h-full object-cover" />
           </div>
 
           <h1 className="font-heading text-3xl sm:text-4xl mb-3 uppercase">

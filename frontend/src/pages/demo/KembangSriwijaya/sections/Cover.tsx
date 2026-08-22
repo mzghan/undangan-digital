@@ -1,5 +1,4 @@
 // frontend/src/pages/demo/KembangSriwijaya/sections/Cover.tsx
-import { useState } from "react";
 import { mempelai, tamuDefault } from "../data";
 
 function Cover({ onBuka }: { onBuka: () => void }) {

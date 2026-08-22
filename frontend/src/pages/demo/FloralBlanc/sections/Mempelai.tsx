@@ -1,6 +1,6 @@
 // frontend/src/pages/demo/FloralBlanc/sections/Mempelai.tsx
 import { motion, type Variants } from "framer-motion";
-import { mempelai } from "../data";
+import { mempelai, foto } from "../data";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -16,11 +16,13 @@ function BarisMempelai({
   anakKe,
   orangTua,
   delay,
+  foto,
 }: {
   nama: string;
   anakKe: string;
   orangTua: string;
   delay: number;
+  foto: string;
 }) {
   return (
     <motion.div
@@ -32,7 +34,7 @@ function BarisMempelai({
       viewport={{ once: true, amount: 0.5 }}
     >
       <div className="w-24 h-32 rounded-[50%] overflow-hidden bg-gradient-to-b from-[#e8c9c9] via-[#c9a06e] to-[#9c6b6b] border border-[#c9a06e]/40">
-        {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover" /> kalau sudah ada foto */}
+        <img src={foto} alt={nama} className="w-full h-full object-cover" />
       </div>
       <h2 className="font-heading text-2xl text-[#5c4a45] uppercase tracking-wide">{nama}</h2>
       <p className="text-[10px] text-[#a8794a] tracking-[0.2em] uppercase">
@@ -45,7 +47,11 @@ function BarisMempelai({
 
 function Mempelai() {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       id="mempelai"
       className="min-h-screen bg-[#faf6f0] text-[#5c4a45] flex flex-col items-center justify-center px-6 py-20 text-center"
     >
@@ -78,15 +84,17 @@ function Mempelai() {
           anakKe={mempelai.pria.anakKe}
           orangTua={mempelai.pria.orangTua}
           delay={0.2}
+          foto={foto.pria}
         />
         <BarisMempelai
           nama={mempelai.wanita.nama}
           anakKe={mempelai.wanita.anakKe}
           orangTua={mempelai.wanita.orangTua}
           delay={0.4}
+          foto={foto.wanita}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

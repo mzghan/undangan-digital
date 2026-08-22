@@ -1,6 +1,6 @@
 // frontend/src/pages/demo/PuspaBali/sections/Mempelai.tsx
 import { motion, type Variants } from "framer-motion";
-import { mempelai } from "../data";
+import { mempelai, foto } from "../data";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -16,11 +16,13 @@ function KartuMempelai({
   anakKe,
   orangTua,
   delay,
+  foto,
 }: {
   nama: string;
   anakKe: string;
   orangTua: string;
   delay: number;
+  foto: string;
 }) {
   return (
     <motion.div
@@ -35,7 +37,7 @@ function KartuMempelai({
         className="w-24 h-28 sm:w-28 sm:h-32 mb-5 bg-gradient-to-br from-[#e3c878] to-[#5c1f1f] border border-[#c9a24b]/60"
         style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
       >
-        {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover" style={{clipPath: "inherit"}} /> kalau sudah ada foto */}
+        <img src={foto} alt={nama} className="w-full h-full object-cover" style={{ clipPath: "inherit" }} />
       </div>
       <h2 className="font-heading text-2xl text-[#f5e6c8] mb-1">{nama}</h2>
       <p className="text-xs text-[#c9a24b] mb-2 tracking-[0.2em] uppercase">
@@ -48,7 +50,11 @@ function KartuMempelai({
 
 function Mempelai() {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       id="mempelai"
       className="relative min-h-screen bg-[#3d1414] text-[#f5e6c8] flex flex-col items-center justify-center px-5 sm:px-10 py-20 text-center overflow-hidden"
     >
@@ -80,6 +86,7 @@ function Mempelai() {
           anakKe={mempelai.pria.anakKe}
           orangTua={mempelai.pria.orangTua}
           delay={0.2}
+          foto={foto.pria}
         />
 
         <span className="font-heading text-2xl italic text-[#c9a24b]">&amp;</span>
@@ -89,9 +96,10 @@ function Mempelai() {
           anakKe={mempelai.wanita.anakKe}
           orangTua={mempelai.wanita.orangTua}
           delay={0.4}
+          foto={foto.wanita}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

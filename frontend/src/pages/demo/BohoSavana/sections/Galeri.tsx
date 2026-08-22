@@ -1,17 +1,16 @@
+import { motion } from "framer-motion";
 // frontend/src/pages/demo/BohoSavana/sections/Galeri.tsx
+import { foto } from "../data";
 
-const gradients = [
-  { grad: "from-[#ead9c2] to-[#b5654a]", rot: "-rotate-3" },
-  { grad: "from-[#b5654a] to-[#8f4a35]", rot: "rotate-2" },
-  { grad: "from-[#7c8363] to-[#c3c9a8]", rot: "-rotate-1" },
-  { grad: "from-[#ddb98a] to-[#6b4230]", rot: "rotate-3" },
-  { grad: "from-[#c3c9a8] to-[#7c8363]", rot: "rotate-1" },
-  { grad: "from-[#8f4a35] to-[#ddb98a]", rot: "-rotate-2" },
-];
+const rotasi = ["-rotate-3", "rotate-2", "-rotate-1", "rotate-3", "rotate-1", "-rotate-2"];
 
 function Galeri() {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       id="galeri"
       className="min-h-screen bg-[#f7efe3] text-[#3d2e1f] flex flex-col items-center px-6 py-20"
     >
@@ -21,19 +20,19 @@ function Galeri() {
       <h2 className="font-heading text-3xl mb-16">Galeri</h2>
 
       {/* Polaroid scatter — tiap foto miring seperti ditempel manual */}
-      <div className="flex flex-wrap justify-center gap-x-6 gap-y-10 max-w-3xl">
-        {gradients.map((item, i) => (
+      <div className="flex flex-wrap justify-center gap-x-6 gap-y-10 max-w-3xl lg:max-w-5xl">
+        {foto.galeri.map((src, i) => (
           <div
             key={i}
-            className={`${item.rot} bg-white p-2.5 pb-6 shadow-lg shadow-[#6b4230]/15 w-32 sm:w-36 hover:rotate-0 hover:scale-105 transition-transform duration-300`}
+            className={`${rotasi[i % rotasi.length]} bg-white p-2.5 pb-6 shadow-lg shadow-[#6b4230]/15 w-32 sm:w-36 lg:w-44 hover:rotate-0 hover:scale-105 transition-transform duration-300`}
           >
-            <div
-              className={`aspect-square bg-gradient-to-br ${item.grad}`}
-            />
+            <div className="aspect-square overflow-hidden">
+              <img src={src} alt={`Momen ${i + 1}`} className="w-full h-full object-cover" />
+            </div>
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

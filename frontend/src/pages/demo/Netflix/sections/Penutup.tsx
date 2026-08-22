@@ -1,9 +1,14 @@
 // frontend/src/pages/demo/Netflix/sections/Penutup.tsx
 import { mempelai } from "../data";
+import { motion } from "framer-motion";
 
 function Penutup() {
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-20 pb-28 text-center">
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }} className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-20 pb-28 text-center">
       <p className="text-[#E50914] font-black text-xl tracking-tight mb-8">
         N<span className="text-white">WEDDING</span>
       </p>
@@ -30,7 +35,7 @@ function Penutup() {
       <div className="mt-16 pt-6 border-t border-[#2a2a2a] text-[10px] tracking-widest uppercase text-[#a3a3a3]">
         Undangan Digital — Netflix Edition · Tayang Selamanya
       </div>
-    </div>
+    </motion.div>
   );
 }
 

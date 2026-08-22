@@ -1,6 +1,7 @@
 // frontend/src/pages/demo/KembangSriwijaya/sections/AcaraLokasi.tsx
 import { useEffect, useState } from "react";
 import { acara } from "../data";
+import { motion } from "framer-motion";
 
 function useCountdown(targetDate: string) {
   const [sisaWaktu, setSisaWaktu] = useState({
@@ -43,7 +44,11 @@ function AcaraLokasi() {
   const countdown = useCountdown(acara.akad.tanggal);
 
   return (
-    <div className="min-h-screen bg-[#2b1b12] text-[#f5e9d6] flex flex-col items-center justify-center px-6 py-20 text-center">
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }} className="min-h-screen bg-[#2b1b12] text-[#f5e9d6] flex flex-col items-center justify-center px-6 py-20 text-center">
       <p className="tracking-[0.3em] text-xs uppercase text-[#d9b98a] mb-10">
         Save The Date
       </p>
@@ -91,7 +96,7 @@ function AcaraLokasi() {
       >
         Lihat Lokasi
       </a>
-    </div>
+    </motion.div>
   );
 }
 

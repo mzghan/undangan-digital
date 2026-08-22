@@ -1,6 +1,6 @@
 // frontend/src/pages/demo/SenjaAesthetic/sections/Mempelai.tsx
 import { motion, type Variants } from "framer-motion";
-import { mempelai } from "../data";
+import { mempelai, foto } from "../data";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -16,11 +16,13 @@ function KartuMempelai({
   anakKe,
   orangTua,
   delay,
+  foto,
 }: {
   nama: string;
   anakKe: string;
   orangTua: string;
   delay: number;
+  foto: string;
 }) {
   return (
     <motion.div
@@ -32,7 +34,7 @@ function KartuMempelai({
       viewport={{ once: true, amount: 0.4 }}
     >
       <div className="w-full aspect-[4/5] rounded-xl mb-5 bg-gradient-to-br from-[#f2c19a] to-[#c17b5f] shadow-md shadow-[#c17b5f]/20 overflow-hidden">
-        {/* Ganti div ini dengan <img src="..." className="w-full h-full object-cover" /> kalau sudah ada foto */}
+        <img src={foto} alt={nama} className="w-full h-full object-cover" />
       </div>
       <h2 className="font-heading text-2xl text-[#3d2a22] mb-1">{nama}</h2>
       <p className="text-xs text-[#c17b5f] mb-2 tracking-wide uppercase font-semibold">
@@ -45,7 +47,11 @@ function KartuMempelai({
 
 function Mempelai() {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       id="mempelai"
       className="relative min-h-screen bg-white text-[#3d2a22] flex flex-col justify-center px-6 sm:px-10 py-20 overflow-hidden"
     >
@@ -78,15 +84,17 @@ function Mempelai() {
           anakKe={mempelai.pria.anakKe}
           orangTua={mempelai.pria.orangTua}
           delay={0.2}
+          foto={foto.pria}
         />
         <KartuMempelai
           nama={mempelai.wanita.nama}
           anakKe={mempelai.wanita.anakKe}
           orangTua={mempelai.wanita.orangTua}
           delay={0.4}
+          foto={foto.wanita}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

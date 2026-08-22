@@ -1,9 +1,14 @@
 // frontend/src/pages/demo/PastelRetro/sections/Penutup.tsx
 import { mempelai } from "../data";
+import { motion } from "framer-motion";
 
 function Penutup() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#d17a9e] to-[#b06a8c] text-white flex flex-col items-center justify-center px-6 py-20 pb-28 text-center">
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }} className="min-h-screen bg-gradient-to-b from-[#d17a9e] to-[#b06a8c] text-white flex flex-col items-center justify-center px-6 py-20 pb-28 text-center">
       <p className="max-w-md text-sm leading-relaxed text-white/85 mb-8 italic">
         "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu
         pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa
@@ -26,7 +31,7 @@ function Penutup() {
       <div className="mt-16 pt-6 border-t border-white/20 text-[10px] tracking-widest uppercase text-white/60">
         Undangan Digital — Pastel Retro
       </div>
-    </div>
+    </motion.div>
   );
 }
 

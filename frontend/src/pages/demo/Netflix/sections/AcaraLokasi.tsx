@@ -1,6 +1,7 @@
 // frontend/src/pages/demo/Netflix/sections/AcaraLokasi.tsx
 import { useEffect, useState } from "react";
 import { acara } from "../data";
+import { motion } from "framer-motion";
 
 function useCountdown(targetDate: string) {
   const [sisaWaktu, setSisaWaktu] = useState({
@@ -43,7 +44,11 @@ function AcaraLokasi() {
   const countdown = useCountdown(acara.akad.tanggal);
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       id="acara"
       className="min-h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center px-6 py-20 text-center"
     >
@@ -103,7 +108,7 @@ function AcaraLokasi() {
       >
         Lihat Lokasi
       </a>
-    </div>
+    </motion.div>
   );
 }
 

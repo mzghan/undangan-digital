@@ -1,4 +1,5 @@
 // frontend/src/pages/demo/KoranLama/data.ts
+import { fotoPria, fotoWanita, ambilFotoPrewed } from "../../../data/fotoDemo";
 
 export const mempelai = {
   pria: {
@@ -41,3 +42,9 @@ export const edisi = {
 };
 export const musik = "/musik/koran-lama.mp3";
 export const judulMusik = "Musik Latar";
+export const foto = {
+  cover: ambilFotoPrewed(6, 1)[0],
+  pria: fotoPria[0],
+  wanita: fotoWanita[0],
+  galeri: ambilFotoPrewed(0, 6),
+};

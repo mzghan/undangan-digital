@@ -1,5 +1,5 @@
 // frontend/src/pages/demo/KoranLama/sections/Cover.tsx
-import { mempelai, tamuDefault, edisi } from "../data";
+import { mempelai, tamuDefault, edisi, foto } from "../data";
 
 function Cover({ onBuka }: { onBuka: () => void }) {
   return (
@@ -34,7 +34,13 @@ function Cover({ onBuka }: { onBuka: () => void }) {
           Resmi Menikah
         </h2>
 
-        <div className="w-full aspect-[4/3] border border-[#2b2620] bg-[repeating-linear-gradient(45deg,_#2b2620_0,_#2b2620_1px,_transparent_1px,_transparent_10px)] opacity-70 mb-4" />
+        <div className="w-full aspect-[4/3] border border-[#2b2620] overflow-hidden mb-4">
+          <img
+            src={foto.cover}
+            alt={`${mempelai.pria.panggilan} & ${mempelai.wanita.panggilan}`}
+            className="w-full h-full object-cover grayscale contrast-125 sepia-[0.15]"
+          />
+        </div>
         <p className="text-[10px] text-center italic mb-6">
           (Foto pasangan pengantin — dokumentasi keluarga)
         </p>

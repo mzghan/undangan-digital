@@ -1,13 +1,12 @@
 // frontend/src/pages/demo/DarkLuxuryNoir/sections/Cover.tsx
-import { mempelai, tamuDefault } from "../data";
+import { mempelai, tamuDefault, foto } from "../data";
 
 function Cover({ onBuka }: { onBuka: () => void }) {
   return (
     <div className="min-h-screen flex flex-col sm:flex-row bg-black text-[#f0ede6]">
       {/* Panel foto — editorial, sisi kiri / atas */}
       <div className="relative w-full sm:w-1/2 h-[42vh] sm:h-screen overflow-hidden">
-        {/* Ganti div ini dengan <img src="..." className="absolute inset-0 w-full h-full object-cover grayscale" /> kalau sudah ada foto */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] via-[#3a3a3a] to-black" />
+        <img src={foto.cover} alt={`${mempelai.pria.panggilan} & ${mempelai.wanita.panggilan}`} className="absolute inset-0 w-full h-full object-cover grayscale" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
         <div className="absolute left-6 top-6 sm:left-10 sm:top-10 text-[10px] tracking-[0.35em] uppercase text-[#d4af6a]">
           Est. 2027

@@ -29,7 +29,7 @@ function KembangSriwijayaDemo() {
           className="min-h-screen bg-[#2b1b12] text-[#f5e9d6]"
           style={batikPatternStyle}
         >
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto">
             <Mempelai />
             <AcaraLokasi />
             <Galeri />

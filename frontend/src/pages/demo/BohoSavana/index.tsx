@@ -20,7 +20,7 @@ function BohoSavanaDemo() {
       {!dibuka && <Cover onBuka={() => setDibuka(true)} />}
       {dibuka && (
         <div className="min-h-screen">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto">
             <Mempelai />
             <AcaraLokasi />
             <Galeri />
