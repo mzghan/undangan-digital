@@ -1,8 +1,8 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --font-heading: "Playfair Display", serif;
-  --font-body: "Jost", sans-serif;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Jost', sans-serif;
 
   --color-brand-50: #fbf6f0;
   --color-brand-100: #f3e4e0;
@@ -16,4 +16,11 @@
 body {
   font-family: var(--font-body);
   color: var(--color-ink);
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE/Edge lama */
+    scrollbar-width: none; /* Firefox */
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome/Safari/Edge baru */
+  }
 }

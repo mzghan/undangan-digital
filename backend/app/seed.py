@@ -110,14 +110,14 @@ planner_dummy = [
     {
         "nama_paket": "Paket Basic",
         "harga": 99000,
-        "jumlah_sheet": 5,
+        "jumlah_sheet": 3,
         "fitur": "Checklist Persiapan,Budget Tracker Sederhana,Timeline H-1 Tahun",
         "deskripsi": "Cocok untuk pasangan yang ingin mulai merencanakan pernikahan secara mandiri.",
     },
     {
         "nama_paket": "Paket Premium",
         "harga": 199000,
-        "jumlah_sheet": 12,
+        "jumlah_sheet": 6,
         "fitur": "Checklist Lengkap,Budget Tracker Detail,Checklist Vendor,Timeline H-1 Tahun,Guest List Manager,Seating Chart",
         "deskripsi": "Paket paling lengkap dengan semua tools yang dibutuhkan dari persiapan hingga hari-H.",
     },
