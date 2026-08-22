@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getTemas } from "../api/temas";
 import { getTestimoni } from "../api/testimoni";
+import { demoTemas } from "../data/demoTemas";
 import Divider from "../components/Divider";
 import HeroShowcase from "../components/HeroShowcase";
 
 function Beranda() {
-  const { data: temas } = useQuery({
-    queryKey: ["temas"],
-    queryFn: getTemas,
-  });
+  const temaPopuler = demoTemas.slice(0, 3);
 
   const { data: testimoniList } = useQuery({
     queryKey: ["testimoni"],
@@ -203,51 +200,57 @@ function Beranda() {
       <Divider />
 
       {/* Preview Tema */}
-      {temas && temas.length > 0 && (
-        <section className="max-w-6xl mx-auto py-16 px-8">
-          <p className="font-body text-xs tracking-[0.25em] uppercase text-brand-400 text-center mb-2">
-            Katalog
-          </p>
-          <h2 className="font-heading text-3xl text-brand-700 text-center mb-12">
-            Tema Populer
-          </h2>
+      <section className="max-w-6xl mx-auto py-16 px-8">
+        <p className="font-body text-xs tracking-[0.25em] uppercase text-brand-400 text-center mb-2">
+          Katalog
+        </p>
+        <h2 className="font-heading text-3xl text-brand-700 text-center mb-12">
+          Tema Populer
+        </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {temas.slice(0, 3).map((tema) => (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {temaPopuler.map((tema) => (
+            <Link
+              key={tema.slug}
+              to={tema.path}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-white rounded-lg overflow-hidden border border-brand-100 hover:shadow-md transition-shadow"
+            >
               <div
-                key={tema.id}
-                className="bg-white rounded-lg overflow-hidden border border-brand-100 hover:shadow-md transition-shadow"
+                className={`relative w-full h-44 bg-gradient-to-br ${tema.gradient} flex items-center justify-center overflow-hidden`}
               >
-                <img
-                  src={tema.gambar_url ?? undefined}
-                  alt={tema.nama}
-                  className="w-full h-44 object-cover"
-                />
-                <div className="p-5">
-                  <p className="text-xs uppercase tracking-wide text-brand-400">
-                    {tema.kategori}
-                  </p>
-                  <h3 className="font-heading text-lg text-brand-700 mt-1">
-                    {tema.nama}
-                  </h3>
-                  <p className="text-ink font-medium text-sm mt-2">
-                    Rp {tema.harga.toLocaleString("id-ID")}
-                  </p>
+                <span className="font-heading text-xl text-white/90 drop-shadow-sm text-center px-4">
+                  {tema.nama}
+                </span>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white text-xs font-medium tracking-wide border border-white/70 rounded-full px-3 py-1">
+                    Lihat Preview
+                  </span>
                 </div>
               </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-10">
-            <Link
-              to="/undangan-digital"
-              className="text-brand-700 font-medium hover:underline"
-            >
-              Lihat semua tema →
+              <div className="p-5">
+                <p className="text-xs uppercase tracking-wide text-brand-400">
+                  {tema.kategori}
+                </p>
+                <h3 className="font-heading text-lg text-brand-700 mt-1">
+                  {tema.nama}
+                </h3>
+                <p className="text-sm text-muted mt-2">{tema.deskripsi}</p>
+              </div>
             </Link>
-          </div>
-        </section>
-      )}
+          ))}
+        </div>
+
+        <div className="text-center mt-10">
+          <Link
+            to="/undangan-digital"
+            className="text-brand-700 font-medium hover:underline"
+          >
+            Lihat semua tema →
+          </Link>
+        </div>
+      </section>
 
       <Divider />
 

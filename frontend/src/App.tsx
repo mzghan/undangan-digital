@@ -13,6 +13,8 @@ import FloralBlancDemo from './pages/demo/FloralBlanc';
 import BohoSavanaDemo from './pages/demo/BohoSavana';
 import DarkLuxuryNoirDemo from './pages/demo/DarkLuxuryNoir';
 import PastelRetroDemo from './pages/demo/PastelRetro';
+import KoranLamaDemo from './pages/demo/KoranLama';
+import NetflixDemo from './pages/demo/Netflix';
 import WeddingPlannerTrial from './pages/WeddingPlannerTrial';
 import WeddingPlannerTrialPremium from './pages/WeddingPlannerTrialPremium';
 import WeddingPlannerTrialVendorTracker from './pages/WeddingPlannerTrialVendorTracker';
@@ -39,6 +41,8 @@ function App() {
         <Route path="/undangan-digital/demo/boho-savana" element={<BohoSavanaDemo />} />
         <Route path="/undangan-digital/demo/dark-luxury-noir" element={<DarkLuxuryNoirDemo />} />
         <Route path="/undangan-digital/demo/pastel-retro" element={<PastelRetroDemo />} />
+        <Route path="/undangan-digital/demo/koran" element={<KoranLamaDemo />} />
+        <Route path="/undangan-digital/demo/netflix" element={<NetflixDemo />} />
       </Routes>
     </BrowserRouter>
   );
