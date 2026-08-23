@@ -5,7 +5,7 @@ import type {
   VendorPaymentSummary,
 } from "../types/vendorPayment";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
 
 async function handle<T>(response: Response, errorMessage: string): Promise<T> {
   if (!response.ok) {
@@ -69,3 +69,4 @@ export async function deletePayment(paymentId: number): Promise<void> {
   );
   await handle(response, "Gagal menghapus jadwal pembayaran");
 }
+

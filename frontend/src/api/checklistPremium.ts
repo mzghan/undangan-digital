@@ -8,7 +8,7 @@ import type {
   ChecklistSubtaskUpdateRequest,
 } from "../types/checklistPremium";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
 
 export async function generateChecklistPremium(
   payload: ChecklistPremiumGenerateRequest,
@@ -134,3 +134,4 @@ export async function deleteSubtask(subtaskId: number): Promise<void> {
     throw new Error("Gagal menghapus subtask");
   }
 }
+

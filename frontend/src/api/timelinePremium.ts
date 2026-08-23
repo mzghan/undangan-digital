@@ -4,7 +4,7 @@ import type {
 } from "../types/timelinePremium";
 import type { ChecklistItemPremium } from "../types/checklistPremium";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
 
 export async function setWeddingDatePremium(
   payload: TimelinePremiumSetRequest,
@@ -47,3 +47,4 @@ export async function resetDeadlineToRecommended(
   }
   return response.json();
 }
+
